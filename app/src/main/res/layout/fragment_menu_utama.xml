@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/pengeluaran_biaya"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/background_master_data">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_pengeluaran"
+                            android:layout_width="50dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"/>
+
+                    </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:fontFamily="@font/barlow_bold"
+                                android:text="Pengeluaran Biaya Usahatani Padi"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:text="Biaya yang dikeluarkan mencakup pembelian bibit, pupuk, obat hama dan biaya yang dikeluarkan lainnya."
+                                android:textSize="15sp"
+                                android:textColor="#000000"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/penerimaan_dana"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:layout_marginRight="10dp"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/background_master_data">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_penerimaan"
+                            android:layout_width="50dp"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Penerimaan Dana Usahatani Padi"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="Penerimaan dana yaitu penjualan hasil panen."
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+                    </LinearLayout>
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<ImageView-->
+                            <!--android:src="@drawable/ic_penerimaan"-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:layout_height="80dp"-->
+                            <!--android:layout_marginTop="20dp"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--android:layout_marginLeft="10dp"/>-->
+
+                    <!--</LinearLayout>-->
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/laporan"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:layout_marginRight="10dp"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/background_master_data">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_laporan" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="Laporan"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="Laporan berisi histori transaksi dan laporan pendapatan."
+                        android:textSize="15sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    </RelativeLayout>
+
+</RelativeLayout>

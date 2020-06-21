@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register_data_pengguna"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar_data_pengguna"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Pengguna"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <!--Nama Usahatani diganti Nama Kelompok Tani-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Kelompok Tani*"
+                    android:layout_marginTop="30dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/nama_kelompok_tani"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pemilik*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/nama_pemilik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nomor Telepon*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/nomor_telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="phone"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi Usahatani"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/deskripsi_usahatani"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pengguna*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/nama_pengguna"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kata Sandi*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/kata_sandi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masukkan Ulang Kata Sandi*"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/kata_sandi_ulang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_data_pengguna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:textColor="#000000"
+                android:text="Selanjutnya"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

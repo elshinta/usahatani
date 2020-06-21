@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo_aplikasi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="AKUPadi atau Aplikasi Keuangan Usahatani Padi"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="adalah aplikasi yang berguna untuk mencatat keuangan petani berupa transaksi pengeluaran dan penerimaan usahataninya menggunakan perangkat smartphone berbasis Android. Aplikasi ini juga dapat membantu petani dalam menampilkan laporan keuangan dan pendapatan."
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Fitur AKUPadi (Aplikasi Keuangan Usahatani Padi)"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="- "
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="Halaman Utama"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Terdapat sub menu yang terdiri dari Pengeluaran Biaya, Penerimaan Dana, dan Laporan (Histori Transaksi dan Laporan Pendapatan). Membantu petani/pengguna untuk mendokumentasikan, menyimpan, dan melihat semua catatan."
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="- "
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="Master Data"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Sekumpulan data yang digunakan dalam aplikasi seperti Data Sawah, Data Hasil Panen, Data Bibit, Data Pupuk, Data Obat Hama, Data Alat, dan Data Satuan."
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="- "
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="Informasi"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Berisi beberapa hal mengenai pengetahuan usahatani padi."
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="- "
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="Tentang Pengguna"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Informasi mengenai data pengguna."
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="- "
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_column="1"
+                        android:layout_marginTop="8dp"
+                        android:text="Tentang Aplikasi"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Informasi mengenai aplikasi."
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="AKUPadi atau Aplikasi Keuangan Usahatani Padi dibangun oleh"
+                android:textColor="#000000"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Alicia Djauharie"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Jurusan Ilmu Komputer"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:text="Universitas Lampung"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    </RelativeLayout>
+
+</RelativeLayout>

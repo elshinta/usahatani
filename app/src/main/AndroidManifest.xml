@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.usahatanipadi">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/petani"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <activity android:name=".PeriodeTransaksiPengeluaran"></activity>
+        <activity android:name=".PeriodeTransaksiPenerimaan"></activity>
+        <activity android:name=".SawahHistoriTransaksi"></activity>
+        <activity android:name=".SawahLaporanPendapatan"></activity>
+        <activity android:name=".MasterDataSatuan" />
+        <activity android:name=".MasterDataAlat" />
+        <activity android:name=".MasterDataObatHama" />
+        <activity android:name=".MasterDataPupuk" />
+        <activity android:name=".MasterDataBibit" />
+        <activity android:name=".MasterDataHasilPanen" />
+        <activity android:name=".MasterDataSawah"/>
+        <activity android:name=".login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LaporanPendapatan"
+            android:parentActivityName=".SawahLaporanPendapatan" />
+        <activity
+            android:name=".LaporanHistoriTransaksi"
+            android:parentActivityName=".SawahHistoriTransaksi" />
+        <activity
+            android:name=".MenuLaporan"
+            android:parentActivityName=".MenuUtama" />
+        <activity android:name=".MenuPenerimaanDanaTersimpan" />
+        <activity
+            android:name=".MenuPenerimaanDana"
+            android:parentActivityName=".MenuUtama" />
+        <activity android:name=".MenuPengeluaranBiayaTersimpan" />
+        <activity
+            android:name=".MenuPengeluaranBiaya"
+            android:parentActivityName=".MenuUtama" />
+        <activity android:name=".MenuUtama" />
+        <activity android:name=".register_data_tersimpan" />
+        <activity android:name=".register_luas_lahan_sawah" />
+        <activity android:name=".register_data_pengguna" />
+
+        <receiver android:name=".NetworkStateChecker">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

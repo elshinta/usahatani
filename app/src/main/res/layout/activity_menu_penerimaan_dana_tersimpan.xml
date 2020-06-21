@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPenerimaanDanaTersimpan"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/tersimpan_penerimaan_dana"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Telah Tersimpan!"
+                    android:fontFamily="@font/wavepool"
+                    android:textColor="#000000"
+                    android:textSize="15sp"/>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Tanggal"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/tanggal_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Lahan Sawah"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/lahan_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Jenis Hasil Panen"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/hasil_panen_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Jumlah"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/jumlah_hasil_panen_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Harga / kg"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/harga_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Total Harga"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/total_harga_hasil_panen_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Luas Panen"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/luas_panen_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Nama Pembeli"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/nama_pelanggan_penerimaan_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Catatan"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text=":  "
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/catatan_penerimaan_tersimpan"
+                            android:layout_column="1"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_lihat_laporan_penerimaan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lihat Laporan"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/btn_kembali_menu_utama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Menu Utama"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

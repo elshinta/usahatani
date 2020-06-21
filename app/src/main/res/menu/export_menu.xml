@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/export"
+        android:icon="@drawable/ic_tentang_aplikasi"
+        android:title="Cetak Laporan"/>
+
+    <item android:id="@+id/tutup_periode"
+    android:icon="@drawable/ic_tentang_aplikasi"
+    android:title="Tutup Periode"/>
+
+    <item android:id="@+id/halaman_awal"
+        android:icon="@drawable/ic_tentang_aplikasi"
+        android:title="Halaman Utama"/>
+
+</menu>

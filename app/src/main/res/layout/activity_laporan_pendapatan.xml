@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LaporanPendapatan"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar_pilih_periode_laporan_pendapatan"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentTop="true">
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_nama_sawah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Sawah"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_luas_lahan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Luas Lahan"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_luas_panen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Luas Panen"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_periode_sawah_pendapatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Periode"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Penerimaan"
+                    android:background="#00ff00"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <TableLayout
+                    android:id="@+id/table_penjualan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_penjualan"
+                            android:layout_width="190dp"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:text="Penjualan"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_penjualan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pengeluaran"
+                    android:background="#00ff00"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <TableLayout
+                    android:id="@+id/table_biaya_tunai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:text="I. "
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_biaya_tunai"
+                            android:layout_column="1"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Biaya Tunai"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_biaya_tunai"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/table_biaya_diperhitungkan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:text="II. "
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Biaya Diperhitungkan"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_biaya_diperhitungkan"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/table_biaya_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:text="III. "
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_biaya_total"
+                            android:layout_column="1"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Biaya Total"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_biaya_total"
+                            android:layout_column="3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pendapatan"
+                    android:background="#00ff00"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_pendapatan_tunai"
+                            android:layout_column="0"
+                            android:layout_width="190dp"
+                            android:layout_height="wrap_content"
+                            android:text="Pendapatan atas biaya tunai"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_pendapatan_tunai"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_pendapatan_diperhitungkan"
+                            android:layout_column="0"
+                            android:layout_width="190dp"
+                            android:layout_height="wrap_content"
+                            android:text="Pendapatan atas total"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_pendapatan_diperhitungkan"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="R/C"
+                    android:background="#00ff00"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_rc_tunai"
+                            android:layout_column="0"
+                            android:layout_width="190dp"
+                            android:layout_height="wrap_content"
+                            android:text="R/C atas biaya tunai"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_rc_tunai"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_rc_total"
+                            android:layout_column="0"
+                            android:layout_width="190dp"
+                            android:layout_height="wrap_content"
+                            android:text="R/C atas biaya total"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tot_rc_total"
+                            android:layout_column="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:background="#D8CECE"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            />
+
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

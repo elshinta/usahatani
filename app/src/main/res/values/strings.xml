@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Usahatani Padi</string>
+    <string-array name="bulan">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
+
+    <string-array name="satuan_luas_lahan">
+        <item>Ha</item>
+        <item>Rante</item>
+        <item>Bau</item>
+    </string-array>
+
+    <string-array name="satuan_berat_pengeluaran">
+        <item>kg</item>
+        <item>kuintal</item>
+        <item>ton</item>
+        <item>liter</item>
+        <item>Rp</item>
+        <item>HOK</item>
+    </string-array>
+
+    <string-array name="satuan_berat_penerimaan">
+        <item>kg</item>
+        <item>kuintal</item>
+        <item>ton</item>
+    </string-array>
+
+    <string-array name="item_cari_berdasarkan">
+        <item>Pengeluaran Biaya (Pembelian)</item>
+        <item>Penerimaan Dana (Penjualan)</item>
+    </string-array>
+
+    <string-array name="kepemilikan">
+        <item>Milik Sendiri</item>
+        <item>Milik Orang Lain</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
+

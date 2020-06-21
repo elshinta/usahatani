@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_catat_keuangan"
+            android:icon="@drawable/ic_catat_keuangan"
+            android:title="Kelola Keuangan Taniku"/>
+        <item android:id="@+id/nav_master_data"
+            android:icon="@drawable/ic_master_data"
+            android:title="Master Data"/>
+        <item android:id="@+id/nav_edukasi"
+            android:icon="@drawable/ic_informasi"
+            android:title="Informasi"/>
+        <item android:id="@+id/nav_info_pengguna"
+            android:icon="@drawable/ic_username"
+            android:title="Tentang Pengguna"/>
+        <item android:id="@+id/nav_info_aplikasi"
+            android:icon="@drawable/ic_tentang_aplikasi"
+            android:title="Tentang Aplikasi"/>
+        <item android:id="@+id/nav_keluar"
+            android:icon="@drawable/ic_exit"
+            android:title="Logout Pengguna"/>
+    </group>
+
+</menu>

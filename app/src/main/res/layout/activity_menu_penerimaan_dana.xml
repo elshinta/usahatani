@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuPenerimaanDana"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/menu_penerimaan_dana"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sawah yang dipilih"
+                    android:textColor="#000000"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/nama_sawah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sawah"
+                    android:textSize="13sp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Periode yang dipilih"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/periode_sawah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Periode"
+                    android:textSize="13sp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Transaksi*"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"/>
+
+                <EditText
+                    android:id="@+id/tgl_penerimaan_dana"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Jenis Hasil Panen*"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"/>
+
+                <Spinner
+                    android:id="@+id/pilih_hasil_panen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_background"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah*"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/jumlah_hasil_panen"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"/>
+
+                    <Spinner
+                        android:id="@+id/satuan_jumlah_hasil_panen"
+                        android:entries="@array/satuan_berat_penerimaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_background">
+                    </Spinner>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga / kg"
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"/>
+
+                <EditText
+                    android:id="@+id/harga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Harga*"
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"/>
+
+                <EditText
+                    android:id="@+id/total_hasil_panen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Luas Panen*"
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/luas_panen"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"/>
+
+                    <Spinner
+                        android:id="@+id/satuan_luas_panen"
+                        android:entries="@array/satuan_luas_lahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_background">
+                    </Spinner>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pembeli"
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"/>
+
+                <EditText
+                    android:id="@+id/nama_pelanggan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Catatan"
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="13sp"/>
+
+                <EditText
+                    android:id="@+id/catatan_penerimaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:hint="Keterangan Lain"
+                    android:layout_marginBottom="20dp"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_simpan_penerimaan_dana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:textColor="#000000"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
