@@ -48,7 +48,7 @@ import java.util.Map;
 public class MenuPengeluaranBiaya extends AppCompatActivity { //deklarasi variabel dan method
     EditText et_tgl_pengeluaran_biaya;
     UserSessionManager session;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/pengeluaran_biaya.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/pengeluaran_biaya.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";

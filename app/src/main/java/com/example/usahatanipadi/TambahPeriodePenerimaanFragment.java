@@ -33,7 +33,7 @@ import java.util.Map;
 public class TambahPeriodePenerimaanFragment extends Fragment {
     UserSessionManager session;
     public DatabaseHelper db;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/tambah_periode.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/tambah_periode.php";
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
 
     @Nullable

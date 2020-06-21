@@ -37,9 +37,9 @@ public class MasterDataAlat extends AppCompatActivity {
     ArrayList<String> listdataalat = new ArrayList<String>();
     ArrayList<String> list_id = new ArrayList<String>();
     DatabaseHelper db;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/master_data.php";
-    public static String URL_EDIT_NAME = "https://usahatani.000webhostapp.com/usahatani/edit_master_data.php";
-    public static String URL_DELETE_NAME = "https://usahatani.000webhostapp.com/usahatani/hapus_master_data.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/master_data.php";
+    public static String URL_EDIT_NAME = "https://ilkomunila.com/usahatani/edit_master_data.php";
+    public static String URL_DELETE_NAME = "https://ilkomunila.com/usahatani/hapus_master_data.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";

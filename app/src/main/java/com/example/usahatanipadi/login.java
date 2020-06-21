@@ -34,13 +34,13 @@ import java.util.regex.Pattern;
 
 public class login extends AppCompatActivity {
     UserSessionManager session;
-    public static String URL_CHECK_USER = "https://usahatani.000webhostapp.com/usahatani/user.php";
-    public static String URL_SAWAH = "https://usahatani.000webhostapp.com/usahatani/restore_sawah.php";
-    public static String URL_PERIODE = "https://usahatani.000webhostapp.com/usahatani/restore_periode.php";
-    public static String URL_KEBUTUHAN = "https://usahatani.000webhostapp.com/usahatani/restore_kebutuhan.php";
-    public static String URL_HASIL = "https://usahatani.000webhostapp.com/usahatani/restore_hasil.php";
-    public static String URL_PENGELUARAN = "https://usahatani.000webhostapp.com/usahatani/restore_pengeluaran.php";
-    public static String URL_PENERIMAAN = "https://usahatani.000webhostapp.com/usahatani/restore_penerimaan.php";
+    public static String URL_CHECK_USER = "https://ilkomunila.com/usahatani/user.php";
+    public static String URL_SAWAH = "https://ilkomunila.com/usahatani/restore_sawah.php";
+    public static String URL_PERIODE = "https://ilkomunila.com/usahatani/restore_periode.php";
+    public static String URL_KEBUTUHAN = "https://ilkomunila.com/usahatani/restore_kebutuhan.php";
+    public static String URL_HASIL = "https://ilkomunila.com/usahatani/restore_hasil.php";
+    public static String URL_PENGELUARAN = "https://ilkomunila.com/usahatani/restore_pengeluaran.php";
+    public static String URL_PENERIMAAN = "https://ilkomunila.com/usahatani/restore_penerimaan.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

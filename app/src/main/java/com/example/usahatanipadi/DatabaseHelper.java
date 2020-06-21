@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
-        super(context, "Usahatani.db", null, 1);
+        super(context, "Usahatani.db", null, 2);
     }
 
     /**
@@ -71,6 +71,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS kebutuhan_tanam");
         db.execSQL("DROP TABLE IF EXISTS penerimaan_dana");
         db.execSQL("DROP TABLE IF EXISTS pengeluaran_biaya");
+
+        //Added new column to book table - book rating
+        if (oldVersion < 2){
+            db.execSQL("ALTER TABLE nama_pengguna ADD COLUMN lama_bertani varchar(5)");
+            db.execSQL("ALTER TABLE nama_pengguna ADD COLUMN level varchar(10)");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS pertanyaan_survey(id_pertanyaan integer primary key autoincrement," +
+                    "id_survey int(5), pertanyaan_body text)");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
+                    "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
+                    "id_periode varchar(255))");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
+                    "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
+
+            db.execSQL(" BEGIN TRANSACTION");
+
+            db.execSQL("ALTER TABLE pengeluaran_biaya RENAME TO pengeluaran_biaya");
+            db.execSQL("CREATE TABLE IF NOT EXISTS pengeluaran_biaya (id_pengeluaran_biaya varchar(255) primary key," +
+                    "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga_pengeluaran varchar(20)" +
+                    ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1))");
+
+            db.execSQL("COMMIT");
+
+            db.execSQL(" BEGIN TRANSACTION");
+
+            db.execSQL("ALTER TABLE penerimaan_dana RENAME TO penerimaan_dana");
+            db.execSQL("CREATE TABLE IF NOT EXISTS penerimaan_dana (id_penerimaan_dana varchar(255) primary key," +
+                    "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga_penerimaan varchar(20)" +
+                    ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1), luas_panen varchar (255), satuan_luas_panen varchar (25))");
+
+            db.execSQL("COMMIT");
+        }
+
     }
 
     /**
@@ -398,7 +433,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_hasil_panen", id_hasil_panen);
         contentValues.put("jumlah", jumlah);
-        contentValues.put("total_harga", total_harga);
+        contentValues.put("total_harga_penerimaan", total_harga);
         contentValues.put("nama_pelanggan", nama_pelanggan);
         contentValues.put("tanggal_penerimaan_dana", tanggal_penerimaan_dana);
         contentValues.put("catatan", catatan);
@@ -423,7 +458,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_hasil_panen", id_hasil_panen);
         contentValues.put("jumlah", jumlah);
-        contentValues.put("total_harga", total_harga);
+        contentValues.put("total_harga_penerimaan", total_harga);
         contentValues.put("nama_pelanggan", nama_pelanggan);
         contentValues.put("tanggal_penerimaan_dana", tanggal_penerimaan_dana);
         contentValues.put("catatan", catatan);
@@ -480,7 +515,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_kebutuhan_tanam", id_kebutuhan_tanam);
         contentValues.put("jumlah", jumlah);
-        contentValues.put("total_harga", total_harga);
+        contentValues.put("total_harga_pengeluaran", total_harga);
         contentValues.put("nama_pemasok", nama_pemasok);
         contentValues.put("tanggal_pengeluaran_biaya", tanggal_pengeluaran_biaya);
         contentValues.put("catatan", catatan);
@@ -503,7 +538,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_kebutuhan_tanam", id_kebutuhan_tanam);
         contentValues.put("jumlah", jumlah);
-        contentValues.put("total_harga", total_harga);
+        contentValues.put("total_harga_pengeluaran", total_harga);
         contentValues.put("nama_pemasok", nama_pemasok);
         contentValues.put("tanggal_pengeluaran_biaya", tanggal_pengeluaran_biaya);
         contentValues.put("catatan", catatan);

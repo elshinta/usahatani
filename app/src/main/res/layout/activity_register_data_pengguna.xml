@@ -102,6 +102,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Lama Bertani*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/et_lama_bertani"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Deskripsi Usahatani"
                     android:layout_marginTop="5dp"
                     android:textColor="#000000"

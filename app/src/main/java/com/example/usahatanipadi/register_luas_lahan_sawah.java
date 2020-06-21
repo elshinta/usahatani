@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class register_luas_lahan_sawah extends AppCompatActivity {
     UserSessionManager session;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/register_luas_lahan_sawah.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/register_luas_lahan_sawah.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";

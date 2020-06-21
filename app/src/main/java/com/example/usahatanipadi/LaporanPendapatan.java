@@ -62,7 +62,7 @@ public class LaporanPendapatan extends AppCompatActivity {
     int total_biaya_tunai = 0;
     int total_biaya_diperhitungkan = 0;
     UserSessionManager session;
-    public static String URL_EDIT_NAME = "https://usahatani.000webhostapp.com/usahatani/tutup_periode.php";
+    public static String URL_EDIT_NAME = "https://ilkomunila.com/usahatani/tutup_periode.php";
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
 

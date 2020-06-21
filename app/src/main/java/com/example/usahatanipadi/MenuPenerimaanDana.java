@@ -48,7 +48,7 @@ import static java.lang.Integer.parseInt;
 public class MenuPenerimaanDana extends AppCompatActivity {
     EditText et_penerimaan;
     UserSessionManager session;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/penerimaan_dana.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/penerimaan_dana.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";

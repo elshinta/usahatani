@@ -29,7 +29,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     //context and database helper object
     private Context context;
     private DatabaseHelper db;
-    public static String URL_SAVE_PERIODE = "https://usahatani.000webhostapp.com/usahatani/tambah_periode.php";
+    public static String URL_SAVE_PERIODE = "https://ilkomunila.com/usahatani/tambah_periode.php";
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
     UserSessionManager session;
 

@@ -44,8 +44,8 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
     ArrayList<String> listnama = new ArrayList<String>();
     ArrayList<String> listcatatan = new ArrayList<String>();
     DatabaseHelper db;
-    public static String URL_DELETE_NAME = "https://usahatani.000webhostapp.com/usahatani/hapus_pengeluaran_biaya.php";
-    public static String URL_DELETE_NAME_PENERIMAAN = "https://usahatani.000webhostapp.com/usahatani/hapus_penerimaan_dana.php";
+    public static String URL_DELETE_NAME = "https://ilkomunila.com/usahatani/hapus_pengeluaran_biaya.php";
+    public static String URL_DELETE_NAME_PENERIMAAN = "https://ilkomunila.com/usahatani/hapus_penerimaan_dana.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

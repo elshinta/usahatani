@@ -28,8 +28,7 @@ import java.util.Map;
 
 public class register_data_pengguna extends AppCompatActivity {
     UserSessionManager session;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/register_data_pengguna.php";
-
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/register_data_pengguna.php";
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
 
@@ -51,9 +50,10 @@ public class register_data_pengguna extends AppCompatActivity {
         session = new UserSessionManager(getApplicationContext());
 
 
-        final EditText et_nama_usahatani = findViewById(R.id.nama_kelompok_tani);
+        final EditText et_kelompok_tani = findViewById(R.id.nama_kelompok_tani);
         final EditText et_nama_pemilik = findViewById(R.id.nama_pemilik);
         final EditText et_nomor_telepon = findViewById(R.id.nomor_telepon);
+        final EditText et_lama_bertani = findViewById(R.id.et_lama_bertani);
         final EditText et_deskripsi_usahatani =findViewById(R.id.deskripsi_usahatani);
         final EditText et_nama_pengguna = findViewById(R.id.nama_pengguna);
         final EditText et_kata_sandi = findViewById(R.id.kata_sandi);
@@ -63,9 +63,10 @@ public class register_data_pengguna extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama_usahatani = et_nama_usahatani.getText().toString();
+                String nama_usahatani = et_kelompok_tani.getText().toString();
                 String nama_pemilik = et_nama_pemilik.getText().toString();
                 String nomor_telepon = et_nomor_telepon.getText().toString();
+                String lama_bertani = et_lama_bertani.getText().toString();
                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
                 String nama_pengguna = et_nama_pengguna.getText().toString();
                 String kata_sandi = et_kata_sandi.getText().toString();
@@ -77,6 +78,8 @@ public class register_data_pengguna extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Nama pemilik harus diisi", Toast.LENGTH_SHORT).show();
                 } else if(nomor_telepon.equals("")){
                     Toast.makeText(getApplicationContext(), "Nomor telepon harus diisi", Toast.LENGTH_SHORT).show();
+                } else if(lama_bertani.equals("")){
+                    Toast.makeText(getApplicationContext(), "Lama bertani harus diisi", Toast.LENGTH_SHORT).show();
                 } else if(nama_pengguna.equals("")){
                     Toast.makeText(getApplicationContext(), "Nama pengguna harus diisi", Toast.LENGTH_SHORT).show();
                 } else if(kata_sandi.equals("")){
@@ -91,9 +94,10 @@ public class register_data_pengguna extends AppCompatActivity {
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SAVE_NAME , new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                String nama_usahatani = et_nama_usahatani.getText().toString();
+                                String nama_usahatani = et_kelompok_tani.getText().toString();
                                 String nama_pemilik = et_nama_pemilik.getText().toString();
                                 String nomor_telepon = et_nomor_telepon.getText().toString();
+                                String lama_bertani = et_lama_bertani.getText().toString();
                                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
                                 String nama_pengguna = et_nama_pengguna.getText().toString();
                                 String kata_sandi = et_kata_sandi.getText().toString();
@@ -129,7 +133,7 @@ public class register_data_pengguna extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                String nama_usahatani = et_nama_usahatani.getText().toString();
+                                String nama_usahatani = et_kelompok_tani.getText().toString();
                                 String nama_pemilik = et_nama_pemilik.getText().toString();
                                 String nomor_telepon = et_nomor_telepon.getText().toString();
                                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
@@ -143,7 +147,7 @@ public class register_data_pengguna extends AppCompatActivity {
                         {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
-                                String nama_usahatani = et_nama_usahatani.getText().toString();
+                                String nama_usahatani = et_kelompok_tani.getText().toString();
                                 String nama_pemilik = et_nama_pemilik.getText().toString();
                                 String nomor_telepon = et_nomor_telepon.getText().toString();
                                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();

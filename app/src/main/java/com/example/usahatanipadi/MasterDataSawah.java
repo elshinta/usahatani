@@ -46,9 +46,9 @@ public class MasterDataSawah extends AppCompatActivity {
     ArrayList<String> list_satuan = new ArrayList<String>();
     DatabaseHelper db;
     String id_pengguna;
-    public static String URL_SAVE_NAME = "https://usahatani.000webhostapp.com/usahatani/register_luas_lahan_sawah.php";
-    public static String URL_EDIT_NAME = "https://usahatani.000webhostapp.com/usahatani/edit_master_data_sawah.php";
-    public static String URL_DELETE_NAME = "https://usahatani.000webhostapp.com/usahatani/hapus_master_data_sawah.php";
+    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/register_luas_lahan_sawah.php";
+    public static String URL_EDIT_NAME = "https://ilkomunila.com/usahatani/edit_master_data_sawah.php";
+    public static String URL_DELETE_NAME = "https://ilkomunila.com/usahatani/hapus_master_data_sawah.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
