@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.usahatanipadi">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+        <activity android:name=".MapsActivity"></activity>
+
         <provider
             android:name=".GenericFileProvider"
             android:authorities="${applicationId}.provider"
@@ -24,17 +34,18 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".PeriodeTransaksiPengeluaran"></activity>
-        <activity android:name=".PeriodeTransaksiPenerimaan"></activity>
-        <activity android:name=".SawahHistoriTransaksi"></activity>
-        <activity android:name=".SawahLaporanPendapatan"></activity>
+
+        <activity android:name=".PeriodeTransaksiPengeluaran" />
+        <activity android:name=".PeriodeTransaksiPenerimaan" />
+        <activity android:name=".SawahHistoriTransaksi" />
+        <activity android:name=".SawahLaporanPendapatan" />
         <activity android:name=".MasterDataSatuan" />
         <activity android:name=".MasterDataAlat" />
         <activity android:name=".MasterDataObatHama" />
         <activity android:name=".MasterDataPupuk" />
         <activity android:name=".MasterDataBibit" />
         <activity android:name=".MasterDataHasilPanen" />
-        <activity android:name=".MasterDataSawah"/>
+        <activity android:name=".MasterDataSawah" />
         <activity android:name=".login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -46,7 +46,14 @@
         <item>Milik Orang Lain</item>
     </string-array>
 
+    <string-array name="level">
+        <item>user</item>
+        <item>ketua</item>
+        <item>surveyor</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="map_key" translatable="false">AIzaSyBs0UFLDw59JqSYapUH_-dn6UyWwXA2FgM</string>
 </resources>
 

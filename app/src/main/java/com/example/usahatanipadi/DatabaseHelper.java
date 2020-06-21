@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
-        super(context, "Usahatani.db", null, 2);
+        super(context, "Usahatani.db", null, 1);
     }
 
     /**
@@ -21,7 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS pengguna(id_pengguna integer primary key autoincrement," +
                 "nama_usahatani varchar(30), nama_pemilik varchar(30), nomor_telepon varchar(15)," +
-                "deskripsi_usahatani text, nama_pengguna varchar(30) unique, kata_sandi varchar(15))");
+                "deskripsi_usahatani text, nama_pengguna varchar(30) unique, kata_sandi varchar(15), kelompok_tani varchar(255), lama_bertani varchar(5)" +
+                ",level varchar(10))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS sawah (id_lahan_sawah varchar(255) primary key," +
                 "id_pengguna integer(11), luas float, alamat text," + "kategori varchar(20), satuan varchar(25), status integer(3))");
@@ -36,12 +37,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "nama_kebutuhan_tanam varchar (50), kategori varchar (50), status integer(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS penerimaan_dana (id_penerimaan_dana varchar(255) primary key," +
-                "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga varchar(20)" +
+                "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga_penerimaan varchar(20)" +
                 ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1), luas_panen varchar (255), satuan_luas_panen varchar (25))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS pengeluaran_biaya (id_pengeluaran_biaya varchar(255) primary key," +
-                "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga varchar(20)" +
+                "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga_pengeluaran varchar(20)" +
                 ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1))");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS pertanyaan_survey(id_pertanyaan integer primary key autoincrement," +
+                "id_survey int(5), pertanyaan_body text)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
+                "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
+                "id_periode varchar(255))");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
+                "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
 
         db.execSQL("INSERT INTO hasil_panen (id_hasil_panen,nama_hasil_panen) VALUES ('hasil_default_1','Gabah Kering Panen')");
         db.execSQL("INSERT INTO hasil_panen (id_hasil_panen,nama_hasil_panen) VALUES ('hasil_default_2','Gabah Kering Giling')");
@@ -71,40 +82,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS kebutuhan_tanam");
         db.execSQL("DROP TABLE IF EXISTS penerimaan_dana");
         db.execSQL("DROP TABLE IF EXISTS pengeluaran_biaya");
+        db.execSQL("DROP TABLE IF EXISTS survey");
+        db.execSQL("DROP TABLE IF EXISTS jawaban_survey");
+        db.execSQL("DROP TABLE IF EXISTS pertanyaan_survey");
 
         //Added new column to book table - book rating
-        if (oldVersion < 2){
-            db.execSQL("ALTER TABLE nama_pengguna ADD COLUMN lama_bertani varchar(5)");
-            db.execSQL("ALTER TABLE nama_pengguna ADD COLUMN level varchar(10)");
-
-            db.execSQL("CREATE TABLE IF NOT EXISTS pertanyaan_survey(id_pertanyaan integer primary key autoincrement," +
-                    "id_survey int(5), pertanyaan_body text)");
-
-            db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
-                    "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
-                    "id_periode varchar(255))");
-
-            db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
-                    "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
-
-            db.execSQL(" BEGIN TRANSACTION");
-
-            db.execSQL("ALTER TABLE pengeluaran_biaya RENAME TO pengeluaran_biaya");
-            db.execSQL("CREATE TABLE IF NOT EXISTS pengeluaran_biaya (id_pengeluaran_biaya varchar(255) primary key," +
-                    "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga_pengeluaran varchar(20)" +
-                    ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1))");
-
-            db.execSQL("COMMIT");
-
-            db.execSQL(" BEGIN TRANSACTION");
-
-            db.execSQL("ALTER TABLE penerimaan_dana RENAME TO penerimaan_dana");
-            db.execSQL("CREATE TABLE IF NOT EXISTS penerimaan_dana (id_penerimaan_dana varchar(255) primary key," +
-                    "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga_penerimaan varchar(20)" +
-                    ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1), luas_panen varchar (255), satuan_luas_panen varchar (25))");
-
-            db.execSQL("COMMIT");
-        }
+//        if (oldVersion == 1){
+//            db.execSQL("ALTER TABLE pengguna ADD COLUMN kelompok_tani varchar(25)");
+//            db.execSQL("ALTER TABLE pengguna ADD COLUMN lama_bertani varchar(5)");
+//            db.execSQL("ALTER TABLE pengguna ADD COLUMN level varchar(10)");
+//
+//            db.execSQL("CREATE TABLE IF NOT EXISTS pertanyaan_survey(id_pertanyaan integer primary key autoincrement," +
+//                    "id_survey int(5), pertanyaan_body text)");
+//
+//            db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
+//                    "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
+//                    "id_periode varchar(255))");
+//
+//            db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
+//                    "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
+//
+//            db.execSQL(" BEGIN TRANSACTION");
+//
+//            db.execSQL("ALTER TABLE pengeluaran_biaya RENAME TO pengeluaran_biaya");
+//            db.execSQL("CREATE TABLE IF NOT EXISTS pengeluaran_biaya (id_pengeluaran_biaya varchar(255) primary key," +
+//                    "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga_pengeluaran varchar(20)" +
+//                    ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1))");
+//
+//            db.execSQL("COMMIT");
+//
+//            db.execSQL(" BEGIN TRANSACTION");
+//
+//            db.execSQL("ALTER TABLE penerimaan_dana RENAME TO penerimaan_dana");
+//            db.execSQL("CREATE TABLE IF NOT EXISTS penerimaan_dana (id_penerimaan_dana varchar(255) primary key," +
+//                    "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga_penerimaan varchar(20)" +
+//                    ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1), luas_panen varchar (255), satuan_luas_panen varchar (25))");
+//
+//            db.execSQL("COMMIT");
+//        }
 
     }
 
@@ -116,9 +131,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param deskripsi_usahatani String
      * @param nama_pengguna String
      * @param kata_sandi String
+     * @param kelompok_tani String
+     * @param lama_bertani String
+     * @param level String
      */
 
-    public boolean insert(String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi) {
+    public boolean insert(String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi, String kelompok_tani, String lama_bertani, String level) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("nama_usahatani", nama_usahatani);
@@ -127,6 +145,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("deskripsi_usahatani", deskripsi_usahatani);
         contentValues.put("nama_pengguna", nama_pengguna);
         contentValues.put("kata_sandi", kata_sandi);
+        contentValues.put("kelompok_tani", kelompok_tani);
+        contentValues.put("lama_bertani", lama_bertani);
+        contentValues.put("level", level);
 
         long ins = db.insert("pengguna", null, contentValues);
         if (ins == -1)

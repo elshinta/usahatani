@@ -5,12 +5,13 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -373,8 +374,11 @@ public class MasterDataSawah extends AppCompatActivity {
                                 if (update_sawah) {
                                     Toast.makeText(getApplicationContext(), "Data sawah berhasil diubah", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(getApplicationContext(), "Data sawah berhasil diubah ke server", Toast.LENGTH_SHORT).show();
-                                    viewData();
-                                    dataSawah.dismiss();
+                                    //viewData();
+                                    //dataSawah.dismiss();
+                                    Intent intent = new Intent(MasterDataSawah.this, MapsActivity.class);
+                                    intent.putExtra("edit_latLng", id_data_sawah);
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gagal mengubah data sawah", Toast.LENGTH_SHORT).show();
                                     dataSawah.dismiss();

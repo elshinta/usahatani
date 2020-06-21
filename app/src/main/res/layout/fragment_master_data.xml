@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_sawah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,9 +64,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_hasil_panen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,9 +109,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_bibit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,9 +154,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_pupuk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,9 +199,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_obat_hama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,9 +244,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_alat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,9 +289,9 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/data_satuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 

@@ -5,13 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -52,6 +53,7 @@ public class register_data_pengguna extends AppCompatActivity {
 
         final EditText et_kelompok_tani = findViewById(R.id.nama_kelompok_tani);
         final EditText et_nama_pemilik = findViewById(R.id.nama_pemilik);
+        final Spinner sp_level = findViewById(R.id.level);
         final EditText et_nomor_telepon = findViewById(R.id.nomor_telepon);
         final EditText et_lama_bertani = findViewById(R.id.et_lama_bertani);
         final EditText et_deskripsi_usahatani =findViewById(R.id.deskripsi_usahatani);
@@ -63,8 +65,9 @@ public class register_data_pengguna extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama_usahatani = et_kelompok_tani.getText().toString();
+                String nama_kelompok_tani = et_kelompok_tani.getText().toString();
                 String nama_pemilik = et_nama_pemilik.getText().toString();
+                String level = sp_level.getSelectedItem().toString();
                 String nomor_telepon = et_nomor_telepon.getText().toString();
                 String lama_bertani = et_lama_bertani.getText().toString();
                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
@@ -72,10 +75,12 @@ public class register_data_pengguna extends AppCompatActivity {
                 String kata_sandi = et_kata_sandi.getText().toString();
                 String kata_sandi_ulang = et_kata_sandi_ulang.getText().toString();
 
-                if(nama_usahatani.equals("")){
-                    Toast.makeText(getApplicationContext(), "Nama usahatani harus diisi", Toast.LENGTH_SHORT).show();
+                if(nama_kelompok_tani.equals("")){
+                    Toast.makeText(getApplicationContext(), "Nama kelompok tani harus diisi", Toast.LENGTH_SHORT).show();
                 } else if(nama_pemilik.equals("")){
                     Toast.makeText(getApplicationContext(), "Nama pemilik harus diisi", Toast.LENGTH_SHORT).show();
+                } else if(level.equals("")){
+                    Toast.makeText(getApplicationContext(), "Level pengguna harus dipilih", Toast.LENGTH_SHORT).show();
                 } else if(nomor_telepon.equals("")){
                     Toast.makeText(getApplicationContext(), "Nomor telepon harus diisi", Toast.LENGTH_SHORT).show();
                 } else if(lama_bertani.equals("")){
@@ -94,8 +99,9 @@ public class register_data_pengguna extends AppCompatActivity {
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SAVE_NAME , new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                String nama_usahatani = et_kelompok_tani.getText().toString();
+                                String kelompok_tani = et_kelompok_tani.getText().toString();
                                 String nama_pemilik = et_nama_pemilik.getText().toString();
+                                String level = sp_level.getSelectedItem().toString();
                                 String nomor_telepon = et_nomor_telepon.getText().toString();
                                 String lama_bertani = et_lama_bertani.getText().toString();
                                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
@@ -109,7 +115,7 @@ public class register_data_pengguna extends AppCompatActivity {
                                     if (!obj.getBoolean("error")) {
                                         //if there is a success
                                         //storing the name to sqlite with status synced
-                                        Boolean insert = db.insert(nama_usahatani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi);
+                                        Boolean insert = db.insert(kelompok_tani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi,kelompok_tani,lama_bertani,level);
                                         if(insert){
                                             session.createUserRegisterSession(nama_pengguna, "tes");
                                             Toast.makeText(getApplicationContext(), "Register berhasil!", Toast.LENGTH_SHORT).show();
@@ -133,12 +139,6 @@ public class register_data_pengguna extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                String nama_usahatani = et_kelompok_tani.getText().toString();
-                                String nama_pemilik = et_nama_pemilik.getText().toString();
-                                String nomor_telepon = et_nomor_telepon.getText().toString();
-                                String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
-                                String nama_pengguna = et_nama_pengguna.getText().toString();
-                                String kata_sandi = et_kata_sandi.getText().toString();
 
                                 progressDialog.dismiss();
                                 Toast.makeText(register_data_pengguna.this,"Untuk menambah data pengguna harus terkoneksi dengan internet.",Toast.LENGTH_SHORT).show();
@@ -147,18 +147,22 @@ public class register_data_pengguna extends AppCompatActivity {
                         {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
-                                String nama_usahatani = et_kelompok_tani.getText().toString();
+                                String kelompok_tani = et_kelompok_tani.getText().toString();
                                 String nama_pemilik = et_nama_pemilik.getText().toString();
+                                String level = sp_level.getSelectedItem().toString();
                                 String nomor_telepon = et_nomor_telepon.getText().toString();
+                                String lama_bertani = et_lama_bertani.getText().toString();
                                 String deskripsi_usahatani = et_deskripsi_usahatani.getText().toString();
                                 String nama_pengguna = et_nama_pengguna.getText().toString();
                                 String kata_sandi = et_kata_sandi.getText().toString();
 
                                 Map<String, String> params = new HashMap<>();
-                                params.put("nama_usahatani",nama_usahatani);
+                                params.put("nama_kelompok_tani",kelompok_tani);
                                 params.put("nama_pemilik",nama_pemilik);
+                                params.put("level",level);
                                 params.put("nomor_telepon",nomor_telepon);
                                 params.put("deskripsi_usahatani",deskripsi_usahatani);
+                                params.put("lama_bertani",lama_bertani);
                                 params.put("nama_pengguna",nama_pengguna);
                                 params.put("kata_sandi",kata_sandi);
 

@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.design.widget.CoordinatorLayout
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -45,7 +45,7 @@
                         android:dividerHeight="1dp"
                         android:listSelector="#C9E6A6">
                     </ListView>
-                </android.support.design.widget.CoordinatorLayout>
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
             </LinearLayout>
         </RelativeLayout>
