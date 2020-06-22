@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ",level varchar(10))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS sawah (id_lahan_sawah varchar(255) primary key," +
-                "id_pengguna integer(11), luas float, alamat text," + "kategori varchar(20), satuan varchar(25), status integer(3))");
+                "id_pengguna integer(11), luas float, alamat text," + "kategori varchar(20), satuan varchar(25), status integer(3), lat float(10,6), lng float(10,6))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS periode (id_periode varchar(255) primary key," +
                 "id_lahan_sawah varchar(255), bulan_periode_awal varchar (50), bulan_periode_akhir varchar (50), tahun_periode_awal varchar (50), tahun_periode_akhir varchar (50), status integer(1), unique(id_lahan_sawah,bulan_periode_awal,tahun_periode_awal))");
@@ -50,9 +50,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
                 "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
                 "id_periode varchar(255))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
+                "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
+                "id_periode varchar(255))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
                 "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
+
+        // tesst data survey
+        db.execSQL("INSERT INTO survey (id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode) VALUES (1,1,'pupuk','5','1')");
+
 
         db.execSQL("INSERT INTO hasil_panen (id_hasil_panen,nama_hasil_panen) VALUES ('hasil_default_1','Gabah Kering Panen')");
         db.execSQL("INSERT INTO hasil_panen (id_hasil_panen,nama_hasil_panen) VALUES ('hasil_default_2','Gabah Kering Giling')");
@@ -262,6 +269,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getDataSawah(String id_pengguna) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from sawah where id_pengguna=? ORDER BY id_lahan_sawah asc", new String[]{id_pengguna});
+        return res;
+    }
+
+    public Cursor getDataSurvey(String id_pengguna) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from survey where id_pengguna=? ORDER BY id_survey asc", new String[]{"1"});
         return res;
     }
 

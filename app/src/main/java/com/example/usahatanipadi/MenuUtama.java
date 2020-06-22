@@ -122,6 +122,9 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
                     ex.printStackTrace();
                 }
                 break;
+            case R.id.nav_survey:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SurveyFragment()).commit();
+                getSupportActionBar().setTitle("Survey");break;
             case R.id.nav_info_pengguna:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InfoPenggunaFragment()).commit();
                 getSupportActionBar().setTitle("Tentang Pengguna");

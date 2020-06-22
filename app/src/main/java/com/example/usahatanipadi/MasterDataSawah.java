@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -121,7 +122,7 @@ public class MasterDataSawah extends AppCompatActivity {
         Cursor res = db.getData(nama);
 
         if (res.getCount() == 0) {
-            Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT).show();
             return;
         }
         while (res.moveToNext()) {
@@ -131,7 +132,7 @@ public class MasterDataSawah extends AppCompatActivity {
 
             Cursor res_sawah = db.getDataSawah(id_pengguna);
             if (res_sawah.getCount() == 0) {
-                Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT).show();
                 return;
             }
             while (res_sawah.moveToNext()) {
@@ -181,6 +182,15 @@ public class MasterDataSawah extends AppCompatActivity {
         final EditText dataAlamat = (EditText)dataSawah.findViewById(R.id.alamat_lahan);
         final EditText dataLuas = (EditText)dataSawah.findViewById(R.id.luas_lahan);
         final Spinner spinnerSatuan = (Spinner)dataSawah.findViewById(R.id.satuan_lahan);
+        final EditText et_koordinat = (EditText) dataSawah.findViewById(R.id.koordinat);
+
+        et_koordinat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MasterDataSawah.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         judulLahan.setText("Tambah Data Sawah");
 
@@ -326,7 +336,16 @@ public class MasterDataSawah extends AppCompatActivity {
         final EditText dataAlamat = (EditText)dataSawah.findViewById(R.id.alamat_lahan);
         final EditText dataLuas = (EditText)dataSawah.findViewById(R.id.luas_lahan);
         final Spinner spinnerSatuan = (Spinner)dataSawah.findViewById(R.id.satuan_lahan);
+        final EditText et_koordinat = (EditText) dataSawah.findViewById(R.id.koordinat);
 
+        et_koordinat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MasterDataSawah.this, MapsActivity.class);
+                intent.putExtra("edit_latLng", id_data_sawah);
+                startActivity(intent);
+            }
+        });
         judulLahan.setText("Ubah Data Sawah");
 
         if(customAdapter.getItemKategori(position).equals("Milik Sendiri"))
@@ -374,11 +393,8 @@ public class MasterDataSawah extends AppCompatActivity {
                                 if (update_sawah) {
                                     Toast.makeText(getApplicationContext(), "Data sawah berhasil diubah", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(getApplicationContext(), "Data sawah berhasil diubah ke server", Toast.LENGTH_SHORT).show();
-                                    //viewData();
-                                    //dataSawah.dismiss();
-                                    Intent intent = new Intent(MasterDataSawah.this, MapsActivity.class);
-                                    intent.putExtra("edit_latLng", id_data_sawah);
-                                    startActivity(intent);
+                                    viewData();
+                                    dataSawah.dismiss();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gagal mengubah data sawah", Toast.LENGTH_SHORT).show();
                                     dataSawah.dismiss();

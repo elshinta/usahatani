@@ -37,7 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/footer"
-            android:layout_below="@+id/header">
+            android:layout_below="@+id/header"
+            android:layout_marginTop="46dp"
+            android:layout_marginBottom="-46dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,11 +58,10 @@
 
                 <Spinner
                     android:id="@+id/pilih_kepemilikan"
-                    android:entries="@array/kepemilikan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/spinner_background">
-                </Spinner>
+                    android:background="@drawable/spinner_background"
+                    android:entries="@array/kepemilikan"></Spinner>
 
                 <LinearLayout
                     android:id="@+id/layoutLahanSendiri"
@@ -91,18 +92,17 @@
                             android:id="@+id/luas_lahan"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="2"
                             android:ems="10"
-                            android:inputType="number"
-                            android:layout_weight="2"/>
+                            android:inputType="number" />
 
                         <Spinner
                             android:id="@+id/satuan_lahan"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:background="@drawable/spinner_background"
-                            android:entries="@array/satuan_luas_lahan"
-                            android:layout_weight="1">
-                        </Spinner>
+                            android:entries="@array/satuan_luas_lahan"></Spinner>
                     </LinearLayout>
 
                     <TextView
@@ -119,6 +119,20 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textMultiLine" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Koordinat*"
+                        android:textColor="#000000"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/koordinat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Klik disini" />
 
                 </LinearLayout>
 

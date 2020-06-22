@@ -15,8 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c553f461-fcb4-4fa9-92a1-efc1e81b5c17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MapsActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_legacy_legacy_support_v4_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_media_media_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/ListViewMasterSurveyAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/SurveyFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_view_master_survey_adapter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_survey.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -29,59 +33,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/usahatanipadi/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/usahatanipadi/ExampleInstrumentedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/EdukasiFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/EdukasiFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/GenericFileProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/GenericFileProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/InfoPenggunaFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/InfoPenggunaFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/LaporanHistoriTransaksi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/LaporanHistoriTransaksi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/LaporanPendapatan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/LaporanPendapatan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataAlat.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataAlat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataBibit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataBibit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataHasilPanen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataHasilPanen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataObatHama.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataObatHama.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataPupuk.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataPupuk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataSatuan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataSatuan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataSawah.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MasterDataSawah.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuLaporan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuLaporan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPenerimaanDana.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPenerimaanDana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPenerimaanDanaTersimpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPenerimaanDanaTersimpan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPengeluaranBiaya.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPengeluaranBiaya.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPengeluaranBiayaTersimpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuPengeluaranBiayaTersimpan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuUtama.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuUtama.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuUtamaFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/MenuUtamaFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/PeriodeTransaksiPenerimaan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/PeriodeTransaksiPenerimaan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/PeriodeTransaksiPengeluaran.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/PeriodeTransaksiPengeluaran.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/SawahHistoriTransaksi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/SawahHistoriTransaksi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/SawahLaporanPendapatan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/SawahLaporanPendapatan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TambahPeriodePenerimaanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TambahPeriodePenerimaanFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TambahPeriodePengeluaranFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TambahPeriodePengeluaranFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodeHistoriTransaksiFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodeHistoriTransaksiFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodeLaporanPendapatanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodeLaporanPendapatanFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodePenerimaanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodePenerimaanFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodePengeluaranFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TampilPeriodePengeluaranFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TentangAplikasiFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/TentangAplikasiFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_data_pengguna.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_data_pengguna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_data_tersimpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_data_tersimpan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_luas_lahan_sawah.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/usahatanipadi/register_luas_lahan_sawah.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_alat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_alat.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_bibit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_bibit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_hasil_panen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_hasil_panen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_obat_hama.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_obat_hama.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_pupuk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_pupuk.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_satuan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_satuan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_sawah.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_master_data_sawah.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_laporan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_laporan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_utama.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_utama.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_data_pengguna.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_data_pengguna.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_master_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_master_data.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_menu_utama.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_menu_utama.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_luas_lahan_sawah.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_luas_lahan_sawah.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/drawer_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/drawer_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/android/support/constraint/group-index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/android/support/group-index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/android/support/test/espresso/group-index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/android/support/test/group-index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/sdk-registry.xml/sdk-registry.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,6 +53,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="G6JVGQHYAECYBUQG" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -102,6 +66,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -109,11 +80,18 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AndroidStudioProjects" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
       <recent name="com.example.usahatanipadi" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.usahatanipadi" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rendy Wijaya\AndroidStudioProjects\usahatani\app\src\main\res\layout" />
     </key>
   </component>
   <component name="RunDashboard">
