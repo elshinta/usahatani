@@ -50,15 +50,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
                 "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
                 "id_periode varchar(255))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
-                "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
-                "id_periode varchar(255))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
                 "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
 
         // tesst data survey
-        db.execSQL("INSERT INTO survey (id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode) VALUES (1,1,'pupuk','5','1')");
+//        db.execSQL("INSERT INTO survey (id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode) VALUES (1,1,'pupuk','5','1')");
 
 
         db.execSQL("INSERT INTO hasil_panen (id_hasil_panen,nama_hasil_panen) VALUES ('hasil_default_1','Gabah Kering Panen')");
@@ -181,6 +178,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public boolean insert_survey(String id_survey,String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_survey", id_survey);
+        contentValues.put("id_pengguna", id_pengguna);
+        contentValues.put("jenis_pertanyaan", jenis_pertanyaan);
+        contentValues.put("jumlah_pertanyaan", jumlah_pertanyaan);
+        contentValues.put("id_periode", id_periode);
+
+        long ins = db.insert("survey", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
     public boolean cek_pengguna(String nama_pengguna, String kata_sandi) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from pengguna where nama_pengguna=? and kata_sandi=?", new String[]{nama_pengguna, kata_sandi});
@@ -274,7 +287,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataSurvey(String id_pengguna) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from survey where id_pengguna=? ORDER BY id_survey asc", new String[]{"1"});
+//        buat logika dimana ngambil id ketua dan administrator
+        Cursor res = db.rawQuery("select * from survey where id_pengguna= ? OR id_pengguna='1' ORDER BY id_survey asc", new String[]{"108"});
+        return res;
+    }
+
+    public Cursor getDataPertanyaan(String id_survey) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from pertanyaan_survey where id_survey=? ORDER BY id_survey asc", new String[]{id_survey});
         return res;
     }
 

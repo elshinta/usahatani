@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -14,11 +15,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by Belal on 1/27/2017.
@@ -30,6 +33,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private Context context;
     private DatabaseHelper db;
     public static String URL_SAVE_PERIODE = "https://ilkomunila.com/usahatani/tambah_periode.php";
+    public static String URL_GET_SURVEY = "https://ilkomunila.com/usahatani/get_survey.php";
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
     UserSessionManager session;
 
@@ -150,6 +154,8 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         );
                     } while (cursor_penerimaan.moveToNext());
                 }
+
+                getSurvey(URL_GET_SURVEY,"2");
 
                 progressDialog.setCancelable(false);
                 new Thread(new Runnable() {
@@ -442,6 +448,45 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
         };
 
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private void getSurvey(String url, final String id){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonPost = new JSONObject(response);
+
+                    //memasukkan data ke dalam variable
+                    String id_survey = jsonPost.getString("id_survey");
+                    String id_pengguna = jsonPost.getString("id_pengguna");
+                    String jenis_pertanyaan = jsonPost.getString("jenis_pertanyaan");
+                    String jumlah_pertanyaan = jsonPost.getString("jumlah_pertanyaan");
+                    String id_periode = jsonPost.getString("id_periode");
+
+                    Boolean insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode);
+                    if(insert) {
+                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id", id);
+                return params;
+            }
+        };
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 }

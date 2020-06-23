@@ -36,8 +36,6 @@ public class MenuPengeluaranBiayaTersimpan extends AppCompatActivity {
         final String periode_terpilih = intent.getStringExtra("periode_terpilih");
         final String id_pengeluaran = intent.getStringExtra("id_pengeluaran");
 
-        Log.d("debugging",id_pengeluaran);
-
         Cursor cursor = db.getDataPengeluaran(id_pengeluaran);
         if(cursor != null)
         {

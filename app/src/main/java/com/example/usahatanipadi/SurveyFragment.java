@@ -1,5 +1,6 @@
 package com.example.usahatanipadi;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class SurveyFragment extends Fragment {
 
         Cursor res = db.getData(nama);
         if (res.getCount() == 0) {
-            Toast.makeText(this.getActivity(), "Erorr!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), "Maaf, belum ada survey baru yang tersedia untuk periode ini", Toast.LENGTH_SHORT).show();
         }
         while (res.moveToNext()) {
             this.id_pengguna = res.getString(0);
@@ -61,7 +62,7 @@ public class SurveyFragment extends Fragment {
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //editDialog(MasterDataSawah.this, position);
+                editData(list_id.get(position));
             }
         });
 
@@ -104,5 +105,11 @@ public class SurveyFragment extends Fragment {
                 list_id.add(res_survey.getString(0));
             }
         }
+    }
+
+    public void editData(String id_survey){
+        Intent intent = new Intent(this.getActivity(), JawabanActivity.class);
+        intent.putExtra("id_survey", id_survey);
+        startActivity(intent);
     }
 }
