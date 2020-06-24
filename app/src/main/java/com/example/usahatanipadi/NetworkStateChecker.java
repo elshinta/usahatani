@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,11 +36,14 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private DatabaseHelper db;
     public static String URL_SAVE_PERIODE = "https://ilkomunila.com/usahatani/tambah_periode.php";
     public static String URL_GET_SURVEY = "https://ilkomunila.com/usahatani/get_survey.php";
+    public static String URL_GET_PERTANYAAN_SURVEY = "https://ilkomunila.com/usahatani/get_pertanyaan_survey.php";
+    public static String URL_GET_ID_KETUA = "https://ilkomunila.com/usahatani/get_id_ketua.php";
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
     UserSessionManager session;
+    Boolean insert;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
 
         this.context = context;
 
@@ -155,7 +160,59 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     } while (cursor_penerimaan.moveToNext());
                 }
 
-                getSurvey(URL_GET_SURVEY,"2");
+                session = new UserSessionManager(context);
+                HashMap<String, String> user = session.getUserDetails();
+                String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
+
+                Cursor res = db.getData(nama_pengguna);
+
+                if (res.getCount() == 0) {
+                    Toast.makeText(context, "Error tidak diketahui", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                while(res.moveToNext()) {
+                    final String kelompok_tani = res.getString(7);
+
+
+                    RequestQueue queue = Volley.newRequestQueue(context);
+
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_ID_KETUA,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        //menaruh data JSON kedalam variabel JSON Object
+                                        JSONObject jsonPost = new JSONObject(response);
+
+                                        //memasukkan data ke dalam variable
+                                        String id_pengguna = jsonPost.getString("id_pengguna");
+                                        getSurvey(URL_GET_SURVEY,id_pengguna);
+
+                                    } catch (JSONException e) {
+                                        Toast.makeText(context, "Ketua tidak ditemukan", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
+                                    }
+
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "Hidupkan koneksi internet untuk memeriksa online database", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<>();
+
+                            params.put("kelompok_tani", kelompok_tani);
+                            return params;
+                        }
+                    };
+                    // Add the request to the RequestQueue.
+                    queue.add(stringRequest);
+                }
 
                 progressDialog.setCancelable(false);
                 new Thread(new Runnable() {
@@ -456,18 +513,89 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonPost = new JSONObject(response);
+                    JSONArray jsonArray = new JSONArray(response);
 
-                    //memasukkan data ke dalam variable
-                    String id_survey = jsonPost.getString("id_survey");
-                    String id_pengguna = jsonPost.getString("id_pengguna");
-                    String jenis_pertanyaan = jsonPost.getString("jenis_pertanyaan");
-                    String jumlah_pertanyaan = jsonPost.getString("jumlah_pertanyaan");
-                    String id_periode = jsonPost.getString("id_periode");
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
-                    Boolean insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode);
+                        //getting json object from the json array
+                        JSONObject obj = jsonArray.getJSONObject(i);
+
+                        //memasukkan data ke dalam variable
+                        String id_survey = obj.getString("id_survey");
+                        session = new UserSessionManager(context);
+                        HashMap<String, String> user = session.getUserDetails();
+                        String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
+
+                        Cursor res = db.getData(nama_pengguna);
+
+                        if (res.getCount() == 0) {
+                            Toast.makeText(context, "Error tidak diketahui", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        while(res.moveToNext()) {
+                            String id_pengguna = res.getString(0);
+                            String jenis_pertanyaan = obj.getString("jenis_pertanyaan");
+                            String jumlah_pertanyaan = obj.getString("jumlah_pertanyaan");
+                            String id_periode = "";
+                            String nama_surveyor = obj.getString("nama_surveyor");
+
+                            insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
+                            getPertanyaanSurvey(URL_GET_PERTANYAAN_SURVEY,id_survey);
+                        }
+                    }
+
                     if(insert) {
                         Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id", id);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public void getPertanyaanSurvey(String url, final String id){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        //getting json object from the json array
+                        JSONObject obj = jsonArray.getJSONObject(i);
+
+                        //memasukkan data ke dalam variable
+                        String id_pertanyaan = obj.getString("id_pertanyaan");
+                        String pertanyaan_body = obj.getString("pertanyaan_body");
+
+                        insert = db.insert_pertanyaan(id_pertanyaan,id,pertanyaan_body);
+
+                    }
+
+                    if(insert) {
+                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {

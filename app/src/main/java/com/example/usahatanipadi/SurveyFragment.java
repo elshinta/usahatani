@@ -45,7 +45,7 @@ public class SurveyFragment extends Fragment {
 
         Cursor res = db.getData(nama);
         if (res.getCount() == 0) {
-            Toast.makeText(this.getActivity(), "Maaf, belum ada survey baru yang tersedia untuk periode ini", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), "Error tidak diketahui", Toast.LENGTH_SHORT).show();
         }
         while (res.moveToNext()) {
             this.id_pengguna = res.getString(0);
@@ -93,16 +93,15 @@ public class SurveyFragment extends Fragment {
             Cursor res_survey = db.getDataSurvey(id_pengguna);
 
             if (res_survey.getCount() == 0) {
-                Toast.makeText(this.getActivity(), "Erorr!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getActivity(), "Data Survey belum ditambahkan", Toast.LENGTH_SHORT).show();
                 return;
             }
             while (res_survey.moveToNext()) {
-                nama_surveyor.add(res_survey.getString(1));
                 ListViewSurvey.put(i, res_survey.getString(0));
-                i++;
-                listnamasurveyor.add(res_survey.getString(1));
+                listnamasurveyor.add(res_survey.getString(5));
                 listkategorisurvey.add(res_survey.getString(2));
                 list_id.add(res_survey.getString(0));
+                i++;
             }
         }
     }

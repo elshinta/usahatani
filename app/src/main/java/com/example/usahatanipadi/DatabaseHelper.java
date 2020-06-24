@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
                 "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
-                "id_periode varchar(255))");
+                "id_periode varchar(255), nama_surveyor varchar(255))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
                 "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
@@ -160,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_restore(String id,String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi) {
+    public boolean insert_restore(String id,String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi,String kelompok_tani) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_pengguna", id);
@@ -170,6 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("deskripsi_usahatani", deskripsi_usahatani);
         contentValues.put("nama_pengguna", nama_pengguna);
         contentValues.put("kata_sandi", kata_sandi);
+        contentValues.put("kelompok_tani", kelompok_tani);
 
         long ins = db.insert("pengguna", null, contentValues);
         if (ins == -1)
@@ -178,7 +179,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_survey(String id_survey,String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode) {
+    public boolean insert_survey(String id_survey,String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_survey", id_survey);
@@ -186,8 +187,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("jenis_pertanyaan", jenis_pertanyaan);
         contentValues.put("jumlah_pertanyaan", jumlah_pertanyaan);
         contentValues.put("id_periode", id_periode);
+        contentValues.put("nama_surveyor", nama_surveyor);
 
         long ins = db.insert("survey", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insert_pertanyaan(String id_pertanyaan,String id_survey,String pertanyaan_body) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_pertanyaan", id_pertanyaan);
+        contentValues.put("id_survey", id_survey);
+        contentValues.put("pertanyaan_body", pertanyaan_body);
+
+        long ins = db.insert("pertanyaan_survey", null, contentValues);
         if (ins == -1)
             return false;
         else
@@ -287,8 +303,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataSurvey(String id_pengguna) {
         SQLiteDatabase db = this.getWritableDatabase();
-//        buat logika dimana ngambil id ketua dan administrator
-        Cursor res = db.rawQuery("select * from survey where id_pengguna= ? OR id_pengguna='1' ORDER BY id_survey asc", new String[]{"108"});
+        Cursor res = db.rawQuery("select * from survey where id_pengguna= ?", new String[]{id_pengguna});
         return res;
     }
 
