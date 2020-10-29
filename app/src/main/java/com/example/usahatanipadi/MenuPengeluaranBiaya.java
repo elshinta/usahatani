@@ -101,7 +101,7 @@ public class MenuPengeluaranBiaya extends AppCompatActivity { //deklarasi variab
         else {
             res_sawah.moveToFirst(); //posisi pointer kursor pada record pertama
             do{
-                textView.setText(res_sawah.getString(3) + " (" + res_sawah.getString(4) + ")");
+                textView.setText(res_sawah.getString(4) + " (" + res_sawah.getString(5) + ")");
             } while (res_sawah.moveToNext());
         }
 
@@ -112,7 +112,7 @@ public class MenuPengeluaranBiaya extends AppCompatActivity { //deklarasi variab
         else {
             res_periode.moveToFirst();
             do{
-                textView_periode.setText(res_periode.getString(2) + " - " + res_periode.getString(4));
+                textView_periode.setText(res_periode.getString(3) + " - " + res_periode.getString(5));
             } while (res_periode.moveToNext());
         }
 

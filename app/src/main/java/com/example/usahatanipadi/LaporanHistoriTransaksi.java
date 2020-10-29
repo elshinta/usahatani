@@ -119,7 +119,7 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             Cursor res_periode = db.getDataIdPeriode(periode_terpilih);
 
             while (res_periode.moveToNext()) {
-                tv_sawah.setText(res_sawah.getString(3) + " (" + res_periode.getString(2) + " " + res_periode.getString(4) + ")");
+                tv_sawah.setText(res_sawah.getString(4) + " (" + res_periode.getString(3) + " " + res_periode.getString(5) + ")");
             }
         }
 

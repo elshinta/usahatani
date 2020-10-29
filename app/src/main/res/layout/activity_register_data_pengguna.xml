@@ -57,13 +57,12 @@
                     android:textSize="13sp"
                     />
 
-                <EditText
-                    android:id="@+id/nama_kelompok_tani"
+                <Spinner
+                    android:id="@+id/id_kelompok_tani"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    />
+                    android:background="@drawable/spinner_background">
+                </Spinner>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,8 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,6 +96,22 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/spinner_background">
                 </Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usia*"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/usia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:layout_width="wrap_content"

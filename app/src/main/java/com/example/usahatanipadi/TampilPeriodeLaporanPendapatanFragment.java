@@ -58,7 +58,7 @@ public class TampilPeriodeLaporanPendapatanFragment extends Fragment {
                 return null;
             }
             while (res_sawah.moveToNext()) {
-                sawah.add(res_sawah.getString(3) + " (" + res_sawah.getString(4) + ")");
+                sawah.add(res_sawah.getString(4) + " (" + res_sawah.getString(5) + ")");
                 spinnerSawah.put(i, res_sawah.getString(0));
                 i++;
             }
@@ -86,7 +86,7 @@ public class TampilPeriodeLaporanPendapatanFragment extends Fragment {
                     Toast.makeText(getActivity(), "Data kosong", Toast.LENGTH_SHORT).show();
                 }
                 while (res_tahun.moveToNext()) {
-                    list_tahun.add(res_tahun.getString(2) + " - " + res_tahun.getString(4));
+                    list_tahun.add(res_tahun.getString(3) + " - " + res_tahun.getString(5));
                     spinnerTahun.put(j, res_tahun.getString(0));
                     j++;
                 }

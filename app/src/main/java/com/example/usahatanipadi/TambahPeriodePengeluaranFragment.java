@@ -50,7 +50,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
         db = new DatabaseHelper(getActivity());
         session = new UserSessionManager(this.getActivity());
         HashMap<String, String> user = session.getUserDetails();
-        String id_pengguna;
+        String id_pengguna = null;
         final String nama = user.get(UserSessionManager.KEY_NAMA);
 
         Cursor res = db.getData(nama);
@@ -69,7 +69,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
                 return null;
             }
             while (res_sawah.moveToNext()) {
-                sawah.add(res_sawah.getString(3) + " (" + res_sawah.getString(4) + ")");
+                sawah.add(res_sawah.getString(4) + " (" + res_sawah.getString(5) + ")");
                 spinnerSawah.put(i, res_sawah.getString(0));
                 i++;
             }
@@ -96,6 +96,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
         spinner_bulan.setAdapter(arrayAdapter_bulan);
 
         Button btn_tambah_periode = (Button)view.findViewById(R.id.btn_tambah_periode);
+        final String finalId_pengguna = id_pengguna;
         btn_tambah_periode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +123,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
                         } else  {
                             id_periode = res_periode.getCount()+1;
                         }
-                        Log.d("debugging","periode_" + nama_pengguna + "_" + String.valueOf(id_periode) + " " + id_sawah + " " + pilih_bulan + " " + pilih_tahun  + " " + "" + " " + "" + " " + "1");
+                        Log.d("debugging","periode_" + nama_pengguna + "_" + String.valueOf(id_periode) + " " + finalId_pengguna + " " + id_sawah + " " + pilih_bulan + " " + pilih_tahun  + " " + "" + " " + "" + " " + "1");
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -132,7 +133,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
 
                                 //if there is a success
                                 //storing the name to sqlite with status synced
-                                Boolean insert_periode = db.insert_periode("periode_" + nama_pengguna + "_" + String.valueOf(id_periode),id_sawah,pilih_bulan,pilih_tahun, "","",1);
+                                Boolean insert_periode = db.insert_periode("periode_" + nama_pengguna + "_" + String.valueOf(id_periode), finalId_pengguna, id_sawah, pilih_bulan, pilih_tahun, "","",1);
                                 if(insert_periode){
                                     Toast.makeText(getActivity(),"Periode berhasil dimasukkan",Toast.LENGTH_SHORT).show();
                                     FragmentTransaction fr  = getFragmentManager().beginTransaction();
@@ -145,6 +146,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
                                     Toast.makeText(getActivity(),"Gagal memasukkan periode. \nPeriode yang dimasukkan tidak boleh sama", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "Periksa kembali data Anda", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -165,7 +167,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
 
                         progressDialog.dismiss();
 
-                        Boolean insert_periode = db.insert_periode("periode_" + nama_pengguna + "_" + String.valueOf(id_periode), id_sawah,pilih_bulan,pilih_tahun, "","",0);
+                        Boolean insert_periode = db.insert_periode("periode_" + nama_pengguna + "_" + String.valueOf(id_periode), finalId_pengguna, id_sawah,pilih_bulan,pilih_tahun, "","",0);
                         if(insert_periode){
                             Toast.makeText(getActivity(),"Periode berhasil dimasukkan",Toast.LENGTH_SHORT).show();
                             FragmentTransaction fr  = getFragmentManager().beginTransaction();
@@ -193,6 +195,7 @@ public class TambahPeriodePengeluaranFragment extends Fragment {
 
                         Map<String, String> params = new HashMap<>();
                         params.put("id_periode","periode_" + nama_pengguna + "_" + String.valueOf(id_periode));
+                        params.put("id_pengguna", finalId_pengguna);
                         params.put("id_lahan_sawah", id_sawah);
                         params.put("bulan_periode_awal", pilih_bulan);
                         params.put("bulan_periode_akhir", "");

@@ -20,39 +20,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS pengguna(id_pengguna integer primary key autoincrement," +
-                "nama_usahatani varchar(30), nama_pemilik varchar(30), nomor_telepon varchar(15)," +
-                "deskripsi_usahatani text, nama_pengguna varchar(30) unique, kata_sandi varchar(15), kelompok_tani varchar(255), lama_bertani varchar(5)" +
-                ",level varchar(10))");
+                " nama_pemilik varchar(30), id_kelompok_tani varchar(10), nomor_telepon varchar(15), usia varchar(5), lama_bertani varchar(5)" +
+                ", deskripsi_usahatani text, nama_pengguna varchar(30) unique, kata_sandi varchar(15), level varchar(10))");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS kelompok_tani(id_kelompok_tani integer primary key autoincrement," + "nama_kelompok_tani varchar(50))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS sawah (id_lahan_sawah varchar(255) primary key," +
-                "id_pengguna integer(11), luas float, alamat text," + "kategori varchar(20), satuan varchar(25), status integer(3), lat float(10,6), lng float(10,6))");
+                "id_pengguna integer(5), luas_sawah varchar(11), luas_panen varchar(11), alamat text," + "kategori varchar(20), satuan_sawah varchar(25), lat float(10,6), lng float(10,6), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS periode (id_periode varchar(255) primary key," +
-                "id_lahan_sawah varchar(255), bulan_periode_awal varchar (50), bulan_periode_akhir varchar (50), tahun_periode_awal varchar (50), tahun_periode_akhir varchar (50), status integer(1), unique(id_lahan_sawah,bulan_periode_awal,tahun_periode_awal))");
+                "id_pengguna int(5), id_lahan_sawah varchar(255), bulan_periode_awal varchar (50), bulan_periode_akhir varchar (50), tahun_periode_awal varchar (50), tahun_periode_akhir varchar (50), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS hasil_panen (id_hasil_panen varchar(255) primary key," +
-                "nama_hasil_panen varchar (50),status integer(3))");
+                "nama_hasil_panen varchar (50), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS kebutuhan_tanam (id_kebutuhan_tanam varchar(255) primary key," +
-                "nama_kebutuhan_tanam varchar (50), kategori varchar (50), status integer(1))");
+                "nama_kebutuhan_tanam varchar (50), kategori varchar (50), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS penerimaan_dana (id_penerimaan_dana varchar(255) primary key," +
-                "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah varchar(11), total_harga_penerimaan varchar(20)" +
-                ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1), luas_panen varchar (255), satuan_luas_panen varchar (25))");
+                "id_lahan_sawah varchar(255), id_hasil_panen varchar(255), jumlah_penerimaan varchar(11), satuan varchar(25), total_harga_penerimaan varchar(20)" +
+                ", nama_pelanggan varchar(50), tanggal_penerimaan_dana varchar(50), catatan varchar(50), id_periode varchar(255), luas_panen varchar (255), satuan_luas_panen varchar (25), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS pengeluaran_biaya (id_pengeluaran_biaya varchar(255) primary key," +
-                "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah varchar(11), total_harga_pengeluaran varchar(20)" +
-                ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), satuan varchar(25), status integer(1))");
+                "id_lahan_sawah varchar(255), id_kebutuhan_tanam varchar(255), jumlah_pengeluaran varchar(11), satuan varchar(25), total_harga_pengeluaran varchar(20)" +
+                ", nama_pemasok varchar(50), tanggal_pengeluaran_biaya varchar(50), catatan varchar(50), id_periode varchar(255), status varchar(1))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS pertanyaan_survey(id_pertanyaan integer primary key autoincrement," +
-                "id_survey int(5), pertanyaan_body text)");
+                "id_survey int(5), pertanyaan_body mediumtext)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS survey(id_survey integer primary key autoincrement," +
                 "id_pengguna int(5), jenis_pertanyaan varchar(40), jumlah_pertanyaan varchar(255), " +
                 "id_periode varchar(255), nama_surveyor varchar(255))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS jawaban_survey(id_jawaban integer primary key autoincrement," +
-                "id_pengguna int(5), id_pertanyaan int(5), jawaban_body text)");
+                "id_pengguna int(5), id_pertanyaan int(5), jawaban_body mediumtext)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS desa(id_desa integer primary key autoincrement," +
+                "nama_desa int(5), kota varchar(30))");
 
         // tesst data survey
 //        db.execSQL("INSERT INTO survey (id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode) VALUES (1,1,'pupuk','5','1')");
@@ -80,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS pengguna");
+        db.execSQL("DROP TABLE IF EXISTS kelompok_tani");
         db.execSQL("DROP TABLE IF EXISTS sawah");
         db.execSQL("DROP TABLE IF EXISTS periode");
         db.execSQL("DROP TABLE IF EXISTS hasil_panen");
@@ -89,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS survey");
         db.execSQL("DROP TABLE IF EXISTS jawaban_survey");
         db.execSQL("DROP TABLE IF EXISTS pertanyaan_survey");
+        db.execSQL("DROP TABLE IF EXISTS desa");
 
         //Added new column to book table - book rating
 //        if (oldVersion == 1){
@@ -129,30 +135,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * DATA PENGGUNA
-     * @param nama_usahatani String
      * @param nama_pemilik String
      * @param nomor_telepon String
      * @param deskripsi_usahatani String
      * @param nama_pengguna String
      * @param kata_sandi String
-     * @param kelompok_tani String
      * @param lama_bertani String
-     * @param level String
      */
 
-    public boolean insert(String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi, String kelompok_tani, String lama_bertani, String level) {
+    public boolean insert(String nama_pemilik, String level, String id_kelompok_tani, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi, String lama_bertani, String usia) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("nama_usahatani", nama_usahatani);
         contentValues.put("nama_pemilik", nama_pemilik);
         contentValues.put("nomor_telepon", nomor_telepon);
         contentValues.put("deskripsi_usahatani", deskripsi_usahatani);
         contentValues.put("nama_pengguna", nama_pengguna);
         contentValues.put("kata_sandi", kata_sandi);
-        contentValues.put("kelompok_tani", kelompok_tani);
         contentValues.put("lama_bertani", lama_bertani);
         contentValues.put("level", level);
-
+        contentValues.put("id_kelompok_tani", id_kelompok_tani);
+        contentValues.put("usia", usia);
         long ins = db.insert("pengguna", null, contentValues);
         if (ins == -1)
             return false;
@@ -160,18 +162,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_restore(String id,String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi,String kelompok_tani) {
+    public boolean insert_restore(String id, String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi, String lama_bertani, String level, String id_kelompok_tani) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_pengguna", id);
-        contentValues.put("nama_usahatani", nama_usahatani);
         contentValues.put("nama_pemilik", nama_pemilik);
         contentValues.put("nomor_telepon", nomor_telepon);
         contentValues.put("deskripsi_usahatani", deskripsi_usahatani);
         contentValues.put("nama_pengguna", nama_pengguna);
         contentValues.put("kata_sandi", kata_sandi);
-        contentValues.put("kelompok_tani", kelompok_tani);
-
+        contentValues.put("lama_bertani", lama_bertani);
+        contentValues.put("level", level);
+        contentValues.put("id_kelompok_tani", id_kelompok_tani);
         long ins = db.insert("pengguna", null, contentValues);
         if (ins == -1)
             return false;
@@ -179,10 +181,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_survey(String id_survey,String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
+    public boolean insert_kelompok_tani(String nama_kelompok_tani) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id_survey", id_survey);
+        contentValues.put("nama_kelompok_tani", nama_kelompok_tani);
+        long ins = db.insert("kelompok_tani", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insert_restore_kelompok_tani(String id,String nama_kelompok_tani) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_kelompok_tani", id);
+        contentValues.put("nama_kelompok_tani", nama_kelompok_tani);
+        long ins = db.insert("kelompok_tani", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insert_survey(String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_pengguna", id_pengguna);
+        contentValues.put("jenis_pertanyaan", jenis_pertanyaan);
+        contentValues.put("jumlah_pertanyaan", jumlah_pertanyaan);
+        contentValues.put("id_periode", id_periode);
+        contentValues.put("nama_surveyor", nama_surveyor);
+
+        long ins = db.insert("survey", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insert_restore_survey(String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
         contentValues.put("id_pengguna", id_pengguna);
         contentValues.put("jenis_pertanyaan", jenis_pertanyaan);
         contentValues.put("jumlah_pertanyaan", jumlah_pertanyaan);
@@ -225,10 +265,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateDataPengguna(String id_pengguna, String nama_usahatani, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi) {
+    public boolean updateDataPengguna(String id_pengguna, String nama_pemilik, String nomor_telepon, String deskripsi_usahatani, String nama_pengguna, String kata_sandi) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("nama_usahatani", nama_usahatani);
         contentValues.put("nama_pemilik", nama_pemilik);
         contentValues.put("nomor_telepon", nomor_telepon);
         contentValues.put("deskripsi_usahatani", deskripsi_usahatani);
@@ -263,10 +302,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_pengguna", id_pengguna);
-        contentValues.put("luas", luas);
+        contentValues.put("luas_sawah", luas);
         contentValues.put("alamat", alamat);
         contentValues.put("kategori", kategori);
-        contentValues.put("satuan", satuan);
+        contentValues.put("satuan_sawah", satuan);
         contentValues.put("status", status);
 
         long ins = db.insert("sawah", null, contentValues);
@@ -282,10 +321,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_pengguna", id_pengguna);
-        contentValues.put("luas", luas);
+        contentValues.put("luas_sawah", luas);
         contentValues.put("alamat", alamat);
         contentValues.put("kategori", kategori);
-        contentValues.put("satuan", satuan);
+        contentValues.put("satuan_sawah", satuan);
         contentValues.put("status", status);
 
         long ins = db.insert("sawah", null, contentValues);
@@ -356,12 +395,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return
      */
 
-    public boolean insert_periode(String id_periode, String id_lahan_sawah, String bulan_periode_awal, String tahun_periode_awal, String bulan_periode_akhir, String tahun_periode_akhir,int status) {
+    public boolean insert_periode(String id_periode,String id_pengguna, String id_lahan_sawah, String bulan_periode_awal, String tahun_periode_awal, String bulan_periode_akhir, String tahun_periode_akhir,int status) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("id_periode", id_periode);
+        contentValues.put("id_pengguna", id_pengguna);
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("bulan_periode_awal", bulan_periode_awal);
         contentValues.put("tahun_periode_awal", tahun_periode_awal);

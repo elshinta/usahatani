@@ -539,7 +539,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             String id_periode = "";
                             String nama_surveyor = obj.getString("nama_surveyor");
 
-                            insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
+                            insert = db.insert_survey(id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
                             getPertanyaanSurvey(URL_GET_PERTANYAAN_SURVEY,id_survey);
                         }
                     }

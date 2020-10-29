@@ -109,13 +109,15 @@ public class login extends AppCompatActivity {
                                             String id_pengguna = jsonPost.getString("id_pengguna");
                                             String nama_usahatani = jsonPost.getString("nama_usahatani");
                                             String nama_pemilik = jsonPost.getString("nama_pemilik");
-                                            String kelompok_tani = jsonPost.getString("kelompok_tani");
+                                            String id_kelompok_tani = jsonPost.getString("id_kelompok_tani");
                                             String nomor_telepon = jsonPost.getString("nomor_telepon");
                                             String deskripsi_usahatani = jsonPost.getString("deskripsi_usahatani");
                                             String nama_pengguna = jsonPost.getString("nama_pengguna");
                                             String kata_sandi = jsonPost.getString("kata_sandi");
+                                            String lama_bertani = jsonPost.getString("lama_bertani");
+                                            String level = jsonPost.getString("level");
 
-                                            Boolean insert = db.insert_restore(id_pengguna,nama_usahatani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi,kelompok_tani);
+                                            Boolean insert = db.insert_restore(id_pengguna,nama_usahatani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi,id_kelompok_tani, level, lama_bertani);
                                             if(insert){
                                                 Boolean cek_pengguna = db.cek_pengguna(nama_pengguna, kata_sandi);
                                                 if (cek_pengguna) {

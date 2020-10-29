@@ -1333,9 +1333,9 @@ public class LaporanPendapatan extends AppCompatActivity {
         while (res_sawah.moveToNext()) {
             Cursor res_periode = db.getDataIdPeriode(periode_terpilih);
             while (res_periode.moveToNext()) {
-                tv_sawah.setText(res_sawah.getString(3));
-                tv_lahan.setText("Luas Lahan (" + res_sawah.getString(2) + " " + res_sawah.getString(5) + ")");
-                tv_periode.setText(res_periode.getString(2) + " " + res_periode.getString(4) + " - " + res_periode.getString(3) + " " + res_periode.getString(5));
+                tv_sawah.setText(res_sawah.getString(4));
+                tv_lahan.setText("Luas Lahan (" + res_sawah.getString(2) + " " + res_sawah.getString(6) + ")");
+                tv_periode.setText(res_periode.getString(3) + " " + res_periode.getString(5) + " - " + res_periode.getString(4) + " " + res_periode.getString(6));
             }
         }
 

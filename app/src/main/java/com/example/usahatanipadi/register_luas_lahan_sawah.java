@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -125,7 +126,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Periksa kembali data Anda2!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Periksa kembali data Anda2!" + obj.toString(), Toast.LENGTH_LONG).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -138,7 +139,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                             String alamat = et_alamat.getText().toString();
 
                             progressDialog.dismiss();
-                            Toast.makeText(register_luas_lahan_sawah.this,"Untuk menambah data luas lahan sawah harus terkoneksi dengan internet.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(register_luas_lahan_sawah.this,"Untuk menambah data luas lahan sawah harus terkoneksi dengan internet." + error.toString(),Toast.LENGTH_SHORT).show();
                         }
                     })
                     {

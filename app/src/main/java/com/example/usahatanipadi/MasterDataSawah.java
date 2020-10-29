@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -136,14 +137,14 @@ public class MasterDataSawah extends AppCompatActivity {
                 return;
             }
             while (res_sawah.moveToNext()) {
-                sawah.add(res_sawah.getString(3) + " (" + res_sawah.getString(4) + ")");
+                sawah.add(res_sawah.getString(2) + " (" + res_sawah.getString(6) + ")");
                 ListViewSawah.put(i, res_sawah.getString(0));
                 i++;
-                listalamat.add(res_sawah.getString(3));
+                listalamat.add(res_sawah.getString(4));
                 listluas.add(res_sawah.getString(2));
-                listkategori.add(res_sawah.getString(4));
+                listkategori.add(res_sawah.getString(5));
                 list_id.add(res_sawah.getString(0));
-                list_satuan.add(res_sawah.getString(5));
+                list_satuan.add(res_sawah.getString(6));
             }
         }
         simpleList = (ListView) findViewById(R.id.lv_data_sawah);

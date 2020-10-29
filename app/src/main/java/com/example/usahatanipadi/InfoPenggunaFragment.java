@@ -100,7 +100,7 @@ public class InfoPenggunaFragment extends Fragment {
                 if (et_kata_sandi_lama.getText().toString().equals(pw)) {
                     if (et_kata_sandi_baru.getText().toString().equals(et_kata_sandi_ulang.getText().toString())) {
 
-                        Boolean sukses = db.updateDataPengguna(id_pengguna, et_nama_usahatani.getText().toString(), et_nama_pemilik.getText().toString(), et_nomor_telepon.getText().toString(), et_deskripsi_usahatani.getText().toString(), et_nama_pengguna.getText().toString(), et_kata_sandi_baru.getText().toString());
+                        Boolean sukses = db.updateDataPengguna(id_pengguna, et_nama_pemilik.getText().toString(), et_nomor_telepon.getText().toString(), et_deskripsi_usahatani.getText().toString(), et_nama_pengguna.getText().toString(), et_kata_sandi_baru.getText().toString());
                         if (sukses) {
                             Toast.makeText(getActivity(), "Berhasil mengubah data!", Toast.LENGTH_SHORT).show();
                             FragmentTransaction fr = getFragmentManager().beginTransaction();
@@ -113,7 +113,7 @@ public class InfoPenggunaFragment extends Fragment {
                         Toast.makeText(getActivity(), "Konfirmasi kata sandi baru tidak sama!", Toast.LENGTH_SHORT).show();
                     }
                 } else if (et_kata_sandi_lama.getText().toString().equals("")) {
-                    Boolean sukses = db.updateDataPengguna(id_pengguna, et_nama_usahatani.getText().toString(), et_nama_pemilik.getText().toString(), et_nomor_telepon.getText().toString(), et_deskripsi_usahatani.getText().toString(), et_nama_pengguna.getText().toString(), pw);
+                    Boolean sukses = db.updateDataPengguna(id_pengguna, et_nama_pemilik.getText().toString(), et_nomor_telepon.getText().toString(), et_deskripsi_usahatani.getText().toString(), et_nama_pengguna.getText().toString(), pw);
                     if (sukses) {
                         Toast.makeText(getActivity(), "Berhasil mengubah data!", Toast.LENGTH_SHORT).show();
                         FragmentTransaction fr = getFragmentManager().beginTransaction();
