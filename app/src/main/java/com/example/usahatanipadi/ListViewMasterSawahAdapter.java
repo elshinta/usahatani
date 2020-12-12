@@ -21,16 +21,22 @@ public class ListViewMasterSawahAdapter extends BaseAdapter {
     ArrayList<String> list_kategori = new ArrayList<String>();
     ArrayList<String> list_id = new ArrayList<String>();
     ArrayList<String> list_satuan = new ArrayList<String>();
+    ArrayList<String> list_latitude = new ArrayList<>();
+    ArrayList<String> list_longitude = new ArrayList<>();
     LayoutInflater inflater;
     DatabaseHelper db;
 
-    public ListViewMasterSawahAdapter(Context applicationContext, ArrayList<String> list_alamat, ArrayList<String> list_luas, ArrayList<String> list_kategori, ArrayList<String> list_id,ArrayList<String> list_satuan) {
+    public ListViewMasterSawahAdapter(Context applicationContext, ArrayList<String> list_alamat, ArrayList<String> list_luas,
+                                      ArrayList<String> list_kategori, ArrayList<String> list_id,ArrayList<String> list_satuan,
+                                      ArrayList<String> list_latitude, ArrayList<String> list_longitude) {
         this.context = context;
         this.list_alamat = list_alamat;
         this.list_luas = list_luas;
         this.list_kategori = list_kategori;
         this.list_id = list_id;
         this.list_satuan = list_satuan;
+        this.list_latitude = list_latitude;
+        this.list_longitude = list_longitude;
         inflater = (LayoutInflater.from(applicationContext));
     }
 
@@ -59,6 +65,9 @@ public class ListViewMasterSawahAdapter extends BaseAdapter {
         TextView alamat = (TextView)view.findViewById(R.id.tv_alamat);
         TextView luas = (TextView)view.findViewById(R.id.tv_luas);
         TextView kategori = (TextView)view.findViewById(R.id.tv_kategori);
+        TextView tvLatitude = view.findViewById(R.id.tv_latitude);
+        TextView tvLongitude = view.findViewById(R.id.tv_longitude);
+
         alamat.setText(list_alamat.get(i));
         DecimalFormat df = new DecimalFormat("#.##");
 
@@ -80,6 +89,8 @@ public class ListViewMasterSawahAdapter extends BaseAdapter {
         }
 
         kategori.setText(list_kategori.get(i));
+        tvLatitude.setText(list_latitude.get(i));
+        tvLongitude.setText(list_longitude.get(i));
         return view;
     }
     public Object getItemLuas(int i){
@@ -93,5 +104,13 @@ public class ListViewMasterSawahAdapter extends BaseAdapter {
     }
     public Object getItemSatuan(int i){
         return list_satuan.get(i);
+    }
+
+    public Object getItemlatitude(int i) {
+        return list_latitude.get(i);
+    }
+
+    public Object getListLongitude(int i) {
+        return list_longitude.get(i);
     }
 }

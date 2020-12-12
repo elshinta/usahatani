@@ -35,12 +35,13 @@ import java.util.regex.Pattern;
 public class login extends AppCompatActivity {
     UserSessionManager session;
     public static String URL_CHECK_USER = "https://ilkomunila.com/usahatani/user.php";
-    public static String URL_SAWAH = "https://ilkomunila.com/usahatani/restore_sawah.php";
     public static String URL_PERIODE = "https://ilkomunila.com/usahatani/restore_periode.php";
     public static String URL_KEBUTUHAN = "https://ilkomunila.com/usahatani/restore_kebutuhan.php";
     public static String URL_HASIL = "https://ilkomunila.com/usahatani/restore_hasil.php";
     public static String URL_PENGELUARAN = "https://ilkomunila.com/usahatani/restore_pengeluaran.php";
     public static String URL_PENERIMAAN = "https://ilkomunila.com/usahatani/restore_penerimaan.php";
+    public static String URL_SAWAH = "http://192.168.1.6/kelompoktani/api/restore_sawah.php";//https://ilkomunila.com/usahatani/restore_sawah.php
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,8 +231,10 @@ public class login extends AppCompatActivity {
                                 String alamat = obj.getString("alamat");
                                 String kategori = obj.getString("kategori");
                                 String satuan = obj.getString("satuan");
+                                String latitude = obj.getString("latitude");
+                                String longitude = obj.getString("longitude");
 
-                                db.insert_sawah_restore(id_lahan_sawah,id_pengguna,luas,alamat,kategori,satuan,1);
+                                db.insert_sawah_restore(id_lahan_sawah,id_pengguna,luas,alamat,kategori,satuan,latitude,longitude,1);
                             }
                             Toast.makeText(getApplicationContext(), "Data sawah berhasil direstore", Toast.LENGTH_SHORT).show();
                         }

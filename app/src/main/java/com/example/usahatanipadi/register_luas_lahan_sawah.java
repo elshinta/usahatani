@@ -11,28 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.example.usahatanipadi.model.ModelResponse;
+import com.example.usahatanipadi.retrofit.ApiClient;
+import com.example.usahatanipadi.retrofit.ApiInterface;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class register_luas_lahan_sawah extends AppCompatActivity {
     UserSessionManager session;
-    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/register_luas_lahan_sawah.php";
+//    public static String URL_SAVE_NAME = "https://ilkomunila.com/usahatani/register_luas_lahan_sawah.php";
 
     //a broadcast to know weather the data is synced or not
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
@@ -46,7 +44,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_luas_lahan_sawah);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_luas_lahan_sawah);
+        Toolbar toolbar = findViewById(R.id.toolbar_luas_lahan_sawah);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Buat Akun");
 
@@ -58,20 +56,20 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
         final String nama = user.get(UserSessionManager.KEY_NAMA);
         Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_SHORT).show();
 
-        final EditText et_luas_lahan = (EditText) findViewById(R.id.luas_lahan);
-        final EditText et_alamat = (EditText) findViewById(R.id.alamat_lahan);
+        final EditText et_luas_lahan = findViewById(R.id.luas_lahan);
+        final EditText et_alamat = findViewById(R.id.alamat_lahan);
         et_luas_lahan.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
 
-        Button btn = (Button) findViewById(R.id.btn_luas_lahan);
+        Button btn = findViewById(R.id.btn_luas_lahan);
         btn.setOnClickListener(new View.OnClickListener() {
             public String id_pengguna;
 
             @Override
             public void onClick(View v) {
 
-                final Spinner pilih_kepemilikan = (Spinner)findViewById(R.id.pilih_kepemilikan);
-                final Spinner sp_satuan = (Spinner)findViewById(R.id.satuan_lahan) ;
+                final Spinner pilih_kepemilikan = findViewById(R.id.pilih_kepemilikan);
+                final Spinner sp_satuan = findViewById(R.id.satuan_lahan);
                 String luas = et_luas_lahan.getText().toString();
                 String alamat = et_alamat.getText().toString();
 
@@ -86,22 +84,33 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
 
                 if (!luas.equals("") || !alamat.equals("")) {
 
+
+                    session = new UserSessionManager(getApplicationContext());
+                    HashMap<String, String> user = session.getUserDetails();
+                    String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
+
+                    int id_sawah;
+
+                    Cursor res_sawah = db.getIDSawah();
+                    if (res_sawah.getCount() == 0) {
+                        id_sawah = 1;
+                    } else  {
+                        id_sawah = res_sawah.getCount()+1;
+                    }
+
                     final ProgressDialog progressDialog = new ProgressDialog(register_luas_lahan_sawah.this);
                     progressDialog.setMessage("Menyimpan Data");
                     progressDialog.show();
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SAVE_NAME , new Response.Listener<String>() {
+
+                    ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ModelResponse> call = apiInterface.registerLuasLahanSawah("sawah_" + nama_pengguna + "_" + id_sawah,
+                            nama_pengguna, luas, alamat, pilih_kepemilikan.getSelectedItem().toString(),
+                            sp_satuan.getSelectedItem().toString(), "", "");
+                    call.enqueue(new Callback<ModelResponse>() {
                         @Override
-                        public void onResponse(String response) {
-                            String luas = et_luas_lahan.getText().toString();
-                            String alamat = et_alamat.getText().toString();
-
-                            progressDialog.dismiss();
-                            try {
-                                JSONObject obj = new JSONObject(response);
-                                if (!obj.getBoolean("error")) {
-                                    //if there is a success
-                                    //storing the name to sqlite with status synced
-
+                        public void onResponse(@NotNull Call<ModelResponse> call, @NotNull retrofit2.Response<ModelResponse> response) {
+                            if (response.body() != null) {
+                                if (!response.body().getError()){
                                     session = new UserSessionManager(getApplicationContext());
                                     HashMap<String, String> user = session.getUserDetails();
                                     String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
@@ -114,7 +123,10 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                                         id_sawah = res_sawah.getCount()+1;
                                     }
 
-                                    Boolean insert_sawah = db.insert_sawah("sawah_" +nama_pengguna + "_" + String.valueOf(id_sawah), id_pengguna, luas, alamat, pilih_kepemilikan.getSelectedItem().toString(),sp_satuan.getSelectedItem().toString(),1);
+                                    Boolean insert_sawah = db.insert_sawah("sawah_" +nama_pengguna + "_" +
+                                                    id_sawah, id_pengguna, luas, alamat,
+                                            pilih_kepemilikan.getSelectedItem().toString(),sp_satuan.getSelectedItem().toString(),
+                                            "","",1);
 
                                     if (insert_sawah) {
                                         Toast.makeText(getApplicationContext(), "Data sawah berhasil diisi", Toast.LENGTH_SHORT).show();
@@ -125,56 +137,19 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
                                     }
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Periksa kembali data Anda2!" + obj.toString(), Toast.LENGTH_LONG).show();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Periksa kembali data Anda2!" , Toast.LENGTH_LONG).show();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            String luas = et_luas_lahan.getText().toString();
-                            String alamat = et_alamat.getText().toString();
 
+                        @Override
+                        public void onFailure(@NotNull Call<ModelResponse> call, @NotNull Throwable t) {
                             progressDialog.dismiss();
-                            Toast.makeText(register_luas_lahan_sawah.this,"Untuk menambah data luas lahan sawah harus terkoneksi dengan internet." + error.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(register_luas_lahan_sawah.this,"Untuk menambah data luas lahan sawah harus terkoneksi dengan internet." + t.getMessage().toString(),Toast.LENGTH_SHORT).show();
+
                         }
-                    })
-                    {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            String luas = et_luas_lahan.getText().toString();
-                            String alamat = et_alamat.getText().toString();
-
-                            session = new UserSessionManager(getApplicationContext());
-                            HashMap<String, String> user = session.getUserDetails();
-                            String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
-
-                            int id_sawah;
-
-                            Cursor res_sawah = db.getIDSawah();
-                            if (res_sawah.getCount() == 0) {
-                                id_sawah = 1;
-                            } else  {
-                                id_sawah = res_sawah.getCount()+1;
-                            }
-
-                            Map<String, String> params = new HashMap<>();
-                            params.put("id","sawah_" + nama_pengguna + "_" + String.valueOf(id_sawah));
-                            params.put("nama_pengguna",nama_pengguna);
-                            params.put("luas",luas);
-                            params.put("alamat",alamat);
-                            params.put("kategori",pilih_kepemilikan.getSelectedItem().toString());
-                            params.put("satuan",sp_satuan.getSelectedItem().toString());
-
-                            return params;
-                        }
-                    };
-
-                    VolleySingleton.getInstance(register_luas_lahan_sawah.this).addToRequestQueue(stringRequest);
-
+                    });
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Luas lahan dan alamat harus diisi", Toast.LENGTH_SHORT).show();

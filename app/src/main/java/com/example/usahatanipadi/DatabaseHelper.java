@@ -296,7 +296,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return
      */
 
-    public boolean insert_sawah(String id_lahan_sawah, String id_pengguna, String luas, String alamat, String kategori,String satuan,int status) {
+    public boolean insert_sawah(String id_lahan_sawah, String id_pengguna, String luas, String alamat,
+                                String kategori,String satuan, String lat, String longi, int status) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -306,6 +308,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("alamat", alamat);
         contentValues.put("kategori", kategori);
         contentValues.put("satuan_sawah", satuan);
+        contentValues.put("lat", lat);
+        contentValues.put("lng", longi);
         contentValues.put("status", status);
 
         long ins = db.insert("sawah", null, contentValues);
@@ -315,7 +319,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_sawah_restore(String id_lahan_sawah, String id_pengguna, String luas, String alamat, String kategori,String satuan,int status) {
+    public boolean insert_sawah_restore(String id_lahan_sawah, String id_pengguna, String luas, String alamat,
+                                        String kategori,String satuan, String lat, String longi, int status) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -325,6 +330,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("alamat", alamat);
         contentValues.put("kategori", kategori);
         contentValues.put("satuan_sawah", satuan);
+        contentValues.put("lat", lat);
+        contentValues.put("lng", longi);
         contentValues.put("status", status);
 
         long ins = db.insert("sawah", null, contentValues);
@@ -352,14 +359,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateDataSawah(String id_lahan, long id_pengguna, String alamat, String luas, String kategori, String satuan) {
+    public boolean updateDataSawah(String id_lahan, long id_pengguna, String alamat, String luas,
+                                   String kategori, String satuan, String latitude, String longitude) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id_pengguna", id_pengguna);
         contentValues.put("alamat", alamat);
-        contentValues.put("luas", luas);
+        contentValues.put("luas_sawah", luas);
         contentValues.put("kategori", kategori);
-        contentValues.put("satuan", satuan);
+        contentValues.put("satuan_sawah", satuan);
+        contentValues.put("lat", latitude);
+        contentValues.put("lng", longitude);
         String whereClause = "id_lahan_sawah=?";
         String whereArgs[] = {id_lahan};
 

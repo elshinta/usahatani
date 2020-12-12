@@ -16,7 +16,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.usahatanipadi.model.ModelResponse;
+import com.example.usahatanipadi.retrofit.ApiClient;
+import com.example.usahatanipadi.retrofit.ApiInterface;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +28,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Created by Belal on 1/27/2017.
@@ -82,7 +89,9 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                 cursor_sawah.getString(2),
                                 cursor_sawah.getString(3),
                                 cursor_sawah.getString(4),
-                                cursor_sawah.getString(5)
+                                cursor_sawah.getString(5),
+                                cursor_sawah.getString(7),
+                                cursor_sawah.getString(8)
                         );
                     } while (cursor_sawah.moveToNext());
                 }
@@ -461,51 +470,35 @@ public class NetworkStateChecker extends BroadcastReceiver {
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    private void saveSawah(final String id, final String luas, final String alamat, final String kategori, final String satuan) {
+    private void saveSawah(final String id, final String luas, final String alamat, final String kategori, final String satuan,
+                           final String latitude, final String longitude) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, MasterDataSawah.URL_SAVE_NAME,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            if (!obj.getBoolean("error")) {
-                                //updating the status in sqlite
-                                db.updateSawah(id, "1");
+        session = new UserSessionManager(context);
+        HashMap<String, String> user = session.getUserDetails();
+        String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
 
-                                //sending the broadcast to refresh the list
-                                context.sendBroadcast(new Intent(DATA_SAVED_BROADCAST));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ModelResponse> call = apiInterface.registerLuasLahanSawah(id, nama_pengguna, luas,
+                alamat, kategori, satuan, latitude, longitude);
+        call.enqueue(new Callback<ModelResponse>() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                session = new UserSessionManager(context);
-                HashMap<String, String> user = session.getUserDetails();
-                String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
+            public void onResponse(@NotNull Call<ModelResponse> call, @NotNull retrofit2.Response<ModelResponse> response) {
+                if (response.body() != null) {
+                    if (!response.body().getError()){
+                        //updating the status in sqlite
+                        db.updateSawah(id, "1");
 
-                Map<String, String> params = new HashMap<>();
-
-                params.put("id",id);
-                params.put("nama_pengguna",nama_pengguna);
-                params.put("luas",luas);
-                params.put("alamat",alamat);
-                params.put("kategori",kategori);
-                params.put("satuan",satuan);
-
-                return params;
+                        //sending the broadcast to refresh the list
+                        context.sendBroadcast(new Intent(DATA_SAVED_BROADCAST));
+                    }
+                }
             }
-        };
 
-        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+            @Override
+            public void onFailure(@NotNull Call<ModelResponse> call, @NotNull Throwable t) {
+
+            }
+        });
     }
 
     private void getSurvey(String url, final String id){
