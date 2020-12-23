@@ -5,12 +5,17 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import androidx.annotation.NonNull;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -32,7 +37,8 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_utama);
-
+        Log.d("Token ", FirebaseInstanceId.getInstance().getToken());
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
         // untuk mendaftarkan sinkronisasi dari NETWORKSTATECHECKER
         registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
@@ -76,9 +82,19 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if(savedInstanceState==null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MenuUtamaFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_catat_keuangan);
+        String menuFragment = getIntent().getStringExtra("menuFragment");
+
+        if (menuFragment != null) {
+            if (menuFragment.equals("surveyFragment")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SurveyFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_survey);
+                getSupportActionBar().setTitle("Survey");
+            }
+        } else{
+            if(savedInstanceState==null){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MenuUtamaFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_catat_keuangan);
+            }
         }
     }
 

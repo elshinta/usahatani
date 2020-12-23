@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "143249345553",
+    "project_id": "usahatanipadi",
+    "storage_bucket": "usahatanipadi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143249345553:android:4b1acd16c6d5df94ee35b0",
+        "android_client_info": {
+          "package_name": "com.example.usahatanipadi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143249345553-6p74dlc32c4fv0de9a7hqls6cgad8r9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJwpimmDd3dU_cHcdUIRa0_84fcEbv0mU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143249345553-6p74dlc32c4fv0de9a7hqls6cgad8r9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

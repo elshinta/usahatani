@@ -40,7 +40,7 @@ public class login extends AppCompatActivity {
     public static String URL_HASIL = "https://ilkomunila.com/usahatani/restore_hasil.php";
     public static String URL_PENGELUARAN = "https://ilkomunila.com/usahatani/restore_pengeluaran.php";
     public static String URL_PENERIMAAN = "https://ilkomunila.com/usahatani/restore_penerimaan.php";
-    public static String URL_SAWAH = "http://192.168.1.6/kelompoktani/api/restore_sawah.php";//https://ilkomunila.com/usahatani/restore_sawah.php
+    public static String URL_SAWAH = "http://ilkomunila.com/usahatani/restore_sawah.php";//https://ilkomunila.com/usahatani/restore_sawah.php
 
 
     @Override
