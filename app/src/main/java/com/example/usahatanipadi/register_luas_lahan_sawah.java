@@ -8,6 +8,9 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
@@ -23,7 +26,10 @@ import com.example.usahatanipadi.retrofit.ApiInterface;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +43,10 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
 
     //Broadcast receiver to know the sync status
     private BroadcastReceiver broadcastReceiver;
+
+    private final int REQUEST_CODE = 100;
+    EditText et_koordinat, dataAlamat;
+    String latitude = "", longitude ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +67,16 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_SHORT).show();
 
         final EditText et_luas_lahan = findViewById(R.id.luas_lahan);
-        final EditText et_alamat = findViewById(R.id.alamat_lahan);
+        dataAlamat = findViewById(R.id.alamat_lahan);
+        et_koordinat = findViewById(R.id.koordinat);
         et_luas_lahan.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-
+        et_koordinat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent moveForResultIntent = new Intent(register_luas_lahan_sawah.this, MapsActivity.class);
+                startActivityForResult(moveForResultIntent, REQUEST_CODE);
+            }
+        });
 
         Button btn = findViewById(R.id.btn_luas_lahan);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +88,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                 final Spinner pilih_kepemilikan = findViewById(R.id.pilih_kepemilikan);
                 final Spinner sp_satuan = findViewById(R.id.satuan_lahan);
                 String luas = et_luas_lahan.getText().toString();
-                String alamat = et_alamat.getText().toString();
+                String alamat = dataAlamat.getText().toString();
 
                 Cursor res = db.getData(nama);
                 if (res.getCount() == 0) {
@@ -105,7 +122,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                     ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
                     Call<ModelResponse> call = apiInterface.registerLuasLahanSawah("sawah_" + nama_pengguna + "_" + id_sawah,
                             nama_pengguna, luas, alamat, pilih_kepemilikan.getSelectedItem().toString(),
-                            sp_satuan.getSelectedItem().toString(), "", "");
+                            sp_satuan.getSelectedItem().toString(), latitude, longitude);
                     call.enqueue(new Callback<ModelResponse>() {
                         @Override
                         public void onResponse(@NotNull Call<ModelResponse> call, @NotNull retrofit2.Response<ModelResponse> response) {
@@ -138,6 +155,7 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
                                     }
                                 }else{
+                                    progressDialog.dismiss();
                                     Toast.makeText(getApplicationContext(), "Periksa kembali data Anda2!" , Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -159,6 +177,40 @@ public class register_luas_lahan_sawah extends AppCompatActivity {
 
         //registering the broadcast receiver to update sync status
         registerReceiver(broadcastReceiver, new IntentFilter(DATA_SAVED_BROADCAST));
+    }
+
+    private String getAddress(String latitude, String longitude){
+        Geocoder geocoder = new Geocoder(register_luas_lahan_sawah.this, Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(latitude), Double.parseDouble(longitude), 1);
+            Address obj = addresses.get(0);
+
+            String add = obj.getAddressLine(0);
+            add = add + ","+ obj.getAdminArea();
+            add = add + ","+ obj.getCountryName();
+
+            return add;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(register_luas_lahan_sawah.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == MapsActivity.RESULT_CODE) {
+                latitude = data.getStringExtra(MapsActivity.EXTRA_LATITUDE);
+                longitude = data.getStringExtra(MapsActivity.EXTRA_LONGITUDE);
+                et_koordinat.setText(latitude+" "+longitude);
+                dataAlamat.setText(getAddress(latitude, longitude));
+            }
+        }
     }
 
     @Override
