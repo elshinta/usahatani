@@ -42,7 +42,7 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_utama);
         Log.d("Token ", FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().subscribeToTopic("myDevices"); // don't forget change to allDevices
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
         // untuk mendaftarkan sinkronisasi dari NETWORKSTATECHECKER
         registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
