@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,16 +57,15 @@ public class TambahPeriodePenerimaanFragment extends Fragment {
         Cursor res = db.getData(nama);
 
         if (res.getCount() == 0) {
-            Toast.makeText(this.getActivity(), "Erorr!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), "Erorr1!", Toast.LENGTH_SHORT).show();
             return null;
         }
         while (res.moveToNext()) {
             int i = 0;
             id_pengguna = res.getString(0);
-
             Cursor res_sawah = db.getDataSawah(id_pengguna);
             if (res_sawah.getCount() == 0) {
-                Toast.makeText(this.getActivity(), "Erorr!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getActivity(), "Erorr2!", Toast.LENGTH_SHORT).show();
                 return null;
             }
             while (res_sawah.moveToNext()) {

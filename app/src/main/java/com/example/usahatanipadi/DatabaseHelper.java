@@ -204,9 +204,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean insert_survey(String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
+    public boolean insert_survey(String id_survey,String id_pengguna,String jenis_pertanyaan, String jumlah_pertanyaan, String id_periode, String nama_surveyor) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("id_survey", id_survey);
         contentValues.put("id_pengguna", id_pengguna);
         contentValues.put("jenis_pertanyaan", jenis_pertanyaan);
         contentValues.put("jumlah_pertanyaan", jumlah_pertanyaan);
@@ -214,6 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("nama_surveyor", nama_surveyor);
 
         long ins = db.insert("survey", null, contentValues);
+
         if (ins == -1)
             return false;
         else

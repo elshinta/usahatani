@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -77,7 +79,7 @@ public class PeriodeTransaksiPenerimaan extends AppCompatActivity {
                 Cursor res = db.getData(nama);
 
                 if (res.getCount() == 0) {
-                    Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Erorrs!", Toast.LENGTH_SHORT);
                     return;
                 }
                 while (res.moveToNext()) {
@@ -86,7 +88,7 @@ public class PeriodeTransaksiPenerimaan extends AppCompatActivity {
 
                     Cursor res_sawah = db.getDataSawah(id_pengguna);
                     if (res_sawah.getCount() == 0) {
-                        Toast.makeText(getApplicationContext(), "Erorr!", Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(), "Erorr2!", Toast.LENGTH_SHORT);
                         return;
                     }
                     while (res_sawah.moveToNext()) {

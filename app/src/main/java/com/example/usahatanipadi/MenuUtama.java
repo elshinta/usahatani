@@ -2,6 +2,7 @@ package com.example.usahatanipadi;
 
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import androidx.annotation.NonNull;
 import com.google.android.material.navigation.NavigationView;
@@ -9,6 +10,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -32,13 +35,14 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
     public static String BENIH = "";
     public static String HAMA = "";
     public static String PENGENDALIANHAMA = "";
+    TextView surveyNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_utama);
         Log.d("Token ", FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
+        FirebaseMessaging.getInstance().subscribeToTopic("myDevices"); // don't forget change to allDevices
         // untuk mendaftarkan sinkronisasi dari NETWORKSTATECHECKER
         registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
@@ -54,6 +58,9 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
 
         Cursor res = db.getData(nama);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        surveyNotif=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                findItem(R.id.nav_survey));
+        initializeCountDrawer();
 
         try {
             if (res.getCount() == 0) {
@@ -156,6 +163,14 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initializeCountDrawer(){
+        //Gravity property aligns the text
+        surveyNotif.setGravity(Gravity.CENTER_VERTICAL);
+        surveyNotif.setTypeface(null, Typeface.BOLD);
+        surveyNotif.setTextColor(getResources().getColor(R.color.colorAccent));
+        surveyNotif.setText("99+");
     }
 
     @Override

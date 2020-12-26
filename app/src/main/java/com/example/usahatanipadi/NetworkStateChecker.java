@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,7 +48,8 @@ public class NetworkStateChecker extends BroadcastReceiver {
     public static String URL_GET_ID_KETUA = "https://ilkomunila.com/usahatani/get_id_ketua.php";
     public static final String DATA_SAVED_BROADCAST = "net.usahatani.datasaved";
     UserSessionManager session;
-    Boolean insert;
+    Boolean insert = false;
+    int newData = 0;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -180,7 +182,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     return;
                 }
                 while(res.moveToNext()) {
-                    final String kelompok_tani = res.getString(7);
+                    final String id_kelompok_tani = res.getString(2);
 
 
                     RequestQueue queue = Volley.newRequestQueue(context);
@@ -215,7 +217,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> params = new HashMap<>();
 
-                            params.put("kelompok_tani", kelompok_tani);
+                            params.put("id_kelompok_tani", id_kelompok_tani);
                             return params;
                         }
                     };
@@ -514,7 +516,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         JSONObject obj = jsonArray.getJSONObject(i);
 
                         //memasukkan data ke dalam variable
-                        String id_survey = obj.getString("id_survey");
                         session = new UserSessionManager(context);
                         HashMap<String, String> user = session.getUserDetails();
                         String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
@@ -527,22 +528,27 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         }
                         while(res.moveToNext()) {
                             String id_pengguna = res.getString(0);
+                            String id_survey = obj.getString("id_survey");
                             String jenis_pertanyaan = obj.getString("jenis_pertanyaan");
                             String jumlah_pertanyaan = obj.getString("jumlah_pertanyaan");
                             String id_periode = "";
                             String nama_surveyor = obj.getString("nama_surveyor");
 
-                            insert = db.insert_survey(id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
+                            insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
                             getPertanyaanSurvey(URL_GET_PERTANYAAN_SURVEY,id_survey);
+                            Log.d("DEBUG",insert.toString());
+                            if(insert){
+                                newData++;
+                            }
                         }
                     }
 
-                    if(insert) {
-                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
+                    if(newData >0 ){
+                        Toast.makeText(context, "Anda memiliki " + newData + " survey baru", Toast.LENGTH_SHORT).show();
+                    } else{
                         Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -585,10 +591,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     }
 
                     if(insert) {
-                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {

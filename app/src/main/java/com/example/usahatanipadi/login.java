@@ -40,7 +40,7 @@ public class login extends AppCompatActivity {
     public static String URL_HASIL = "https://ilkomunila.com/usahatani/restore_hasil.php";
     public static String URL_PENGELUARAN = "https://ilkomunila.com/usahatani/restore_pengeluaran.php";
     public static String URL_PENERIMAAN = "https://ilkomunila.com/usahatani/restore_penerimaan.php";
-    public static String URL_SAWAH = "http://ilkomunila.com/usahatani/restore_sawah.php";//https://ilkomunila.com/usahatani/restore_sawah.php
+    public static String URL_SAWAH = "https://ilkomunila.com/usahatani/restore_sawah.php";//https://ilkomunila.com/usahatani/restore_sawah.php
 
 
     @Override
@@ -118,7 +118,7 @@ public class login extends AppCompatActivity {
                                             String lama_bertani = jsonPost.getString("lama_bertani");
                                             String level = jsonPost.getString("level");
 
-                                            Boolean insert = db.insert_restore(id_pengguna,nama_usahatani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi,id_kelompok_tani, level, lama_bertani);
+                                            Boolean insert = db.insert_restore(id_pengguna,nama_usahatani,nama_pemilik,nomor_telepon,deskripsi_usahatani,nama_pengguna,kata_sandi,lama_bertani,level,id_kelompok_tani);
                                             if(insert){
                                                 Boolean cek_pengguna = db.cek_pengguna(nama_pengguna, kata_sandi);
                                                 if (cek_pengguna) {
@@ -390,7 +390,7 @@ public class login extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 //Peringatan jika ingin restore data harus online
-                Toast.makeText(getApplicationContext(), "Untuk restore data harus online!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
