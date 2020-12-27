@@ -35,14 +35,15 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
     public static String BENIH = "";
     public static String HAMA = "";
     public static String PENGENDALIANHAMA = "";
-    TextView surveyNotif;
+    public static TextView surveyNotif;
+    static String COUNT_SURVEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_utama);
         Log.d("Token ", FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices"); // don't forget change to allDevices
         // untuk mendaftarkan sinkronisasi dari NETWORKSTATECHECKER
         registerReceiver(new NetworkStateChecker(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
@@ -166,11 +167,32 @@ public class MenuUtama extends AppCompatActivity implements NavigationView.OnNav
     }
 
     private void initializeCountDrawer(){
+        db = new DatabaseHelper(MenuUtama.this);
+        String id_pengguna;
+        HashMap<String, String> user = session.getUserDetails();
+        final String nama = user.get(UserSessionManager.KEY_NAMA);
+        Cursor res = db.getData(nama);
+        if (res.getCount() == 0) {
+            Toast.makeText(MenuUtama.this, "Erorr!", Toast.LENGTH_SHORT).show();
+        }
+        while (res.moveToNext()) {
+            id_pengguna = res.getString(0);
+
+            Cursor res_count_survey = db.countDataSurvey(id_pengguna);
+            if (res_count_survey.getCount() == 0) {
+                Toast.makeText(MenuUtama.this, "Something error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            while (res_count_survey.moveToNext()) {
+                COUNT_SURVEY = res_count_survey.getString(0);
+            }
+        }
+
         //Gravity property aligns the text
         surveyNotif.setGravity(Gravity.CENTER_VERTICAL);
         surveyNotif.setTypeface(null, Typeface.BOLD);
         surveyNotif.setTextColor(getResources().getColor(R.color.colorAccent));
-        surveyNotif.setText("99+");
+        surveyNotif.setText(COUNT_SURVEY);
     }
 
     @Override
