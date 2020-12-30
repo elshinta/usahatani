@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SurveyFragment extends Fragment {
     UserSessionManager session;
     public DatabaseHelper db;
     String id_pengguna;
+    Boolean insert = false;
+    int newData = 0;
 
     ListView simpleList;
     ListViewMasterSurveyAdapter customAdapter;
@@ -50,6 +64,8 @@ public class SurveyFragment extends Fragment {
         while (res.moveToNext()) {
             this.id_pengguna = res.getString(0);
         }
+
+        getSurvey(NetworkStateChecker.URL_GET_SURVEY,id_pengguna);
 
         viewData();
 
@@ -110,5 +126,119 @@ public class SurveyFragment extends Fragment {
         Intent intent = new Intent(this.getActivity(), JawabanActivity.class);
         intent.putExtra("id_survey", id_survey);
         startActivity(intent);
+    }
+
+    private void getSurvey(String url, final String id){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        //getting json object from the json array
+                        JSONObject obj = jsonArray.getJSONObject(i);
+
+                        //memasukkan data ke dalam variable
+                        session = new UserSessionManager(getActivity());
+                        HashMap<String, String> user = session.getUserDetails();
+                        String nama_pengguna = user.get(UserSessionManager.KEY_NAMA);
+
+                        Cursor res = db.getData(nama_pengguna);
+
+                        if (res.getCount() == 0) {
+                            Toast.makeText(getActivity(), "Error tidak diketahui", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        while(res.moveToNext()) {
+                            String id_pengguna = res.getString(0);
+                            String id_survey = obj.getString("id_survey");
+                            String jenis_pertanyaan = obj.getString("jenis_pertanyaan");
+                            String jumlah_pertanyaan = obj.getString("jumlah_pertanyaan");
+                            String id_periode = "";
+                            String nama_surveyor = obj.getString("nama_surveyor");
+
+                            insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
+                            getPertanyaanSurvey(NetworkStateChecker.URL_GET_PERTANYAAN_SURVEY,id_survey);
+                            Log.d("DEBUG",insert.toString());
+                            if(insert){
+                                newData++;
+                            }
+                        }
+                    }
+
+                    if(newData >0 ){
+                        Toast.makeText(getActivity(), "Anda memiliki " + newData + " survey baru", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(getActivity(), "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id", id);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    public void getPertanyaanSurvey(String url, final String id){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        //getting json object from the json array
+                        JSONObject obj = jsonArray.getJSONObject(i);
+
+                        //memasukkan data ke dalam variable
+                        String id_pertanyaan = obj.getString("id_pertanyaan");
+                        String pertanyaan_body = obj.getString("pertanyaan_body");
+
+                        insert = db.insert_pertanyaan(id_pertanyaan,id,pertanyaan_body);
+
+                    }
+
+                    if(insert) {
+//                        Toast.makeText(context, "Anda memiliki survey baru", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+//                        Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id", id);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 }
