@@ -111,7 +111,6 @@ public class TampilPeriodeHistoriTransaksiFragment extends Fragment {
         btn_tampil_periode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String sawah_terpilih = spinnerSawah.get(pilih_lahan_sawah.getSelectedItemPosition());
                 String tahun_terpilih = spinnerTahun.get(spinner_tahun.getSelectedItemPosition());
                 try {

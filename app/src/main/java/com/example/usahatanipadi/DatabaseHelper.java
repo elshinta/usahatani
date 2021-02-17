@@ -577,7 +577,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_penerimaan_dana", id_penerimaan_dana);
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_hasil_panen", id_hasil_panen);
-        contentValues.put("jumlah", jumlah);
+        contentValues.put("jumlah_penerimaan", jumlah);
         contentValues.put("total_harga_penerimaan", total_harga);
         contentValues.put("nama_pelanggan", nama_pelanggan);
         contentValues.put("tanggal_penerimaan_dana", tanggal_penerimaan_dana);
@@ -659,7 +659,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("id_pengeluaran_biaya", id_pengeluaran_biaya);
         contentValues.put("id_lahan_sawah", id_lahan_sawah);
         contentValues.put("id_kebutuhan_tanam", id_kebutuhan_tanam);
-        contentValues.put("jumlah", jumlah);
+        contentValues.put("jumlah_pengeluaran", jumlah);
         contentValues.put("total_harga_pengeluaran", total_harga);
         contentValues.put("nama_pemasok", nama_pemasok);
         contentValues.put("tanggal_pengeluaran_biaya", tanggal_pengeluaran_biaya);

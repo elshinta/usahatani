@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -69,29 +71,30 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             Spinner sp_cari_berdasarkan = (Spinner) findViewById(R.id.cari_berdasarkan);
             sp_cari_berdasarkan.setSelection(0);
         }
+
         Spinner sp_cari_berdasarkan = (Spinner) findViewById(R.id.cari_berdasarkan);
         if (sp_cari_berdasarkan.getSelectedItemPosition() == 0) {
                 viewData();
         } else {
                 viewDataPenerimaan();
         }
-
-        sp_cari_berdasarkan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position == 0) {
-                    viewData();
-                } else {
-                    viewDataPenerimaan();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//
+//        sp_cari_berdasarkan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (position == 0) {
+//                    viewData();
+//                } else {
+//                    viewDataPenerimaan();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
     }
 
     /*
@@ -136,21 +139,21 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             }
 
             DecimalFormat formatter = new DecimalFormat("#,###");
-            String format_tot_barang_jasa = formatter.format(Integer.parseInt(res_hasil.getString(4)));
+            String format_tot_barang_jasa = formatter.format(res_hasil.getInt(5));
 
             float konversi_satuan=0;
-            if(res_hasil.getString(9).equals("ton")) {
+            if(res_hasil.getString(4).equals("ton")) {
                 konversi_satuan = Float.parseFloat(res_hasil.getString(3))*1000;
             }
-            else if(res_hasil.getString(9).equals("kuintal")){
+            else if(res_hasil.getString(4).equals("kuintal")){
                 konversi_satuan = Float.parseFloat(res_hasil.getString(3))*100;
             }
-            else if(res_hasil.getString(9).equals("kg")){
+            else if(res_hasil.getString(4).equals("kg")){
                 konversi_satuan = Float.parseFloat(res_hasil.getString(3))*1;
             }
 
             float harga;
-            harga = res_hasil.getFloat(4) / konversi_satuan;
+            harga = res_hasil.getFloat(5) / konversi_satuan;
             String format_harga = formatter.format(harga);
 
             DecimalFormat df = new DecimalFormat("#.##");
@@ -159,12 +162,12 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             String format_jml = res_hasil.getString(3).replaceAll("\\.", ",");
 
             list_id.add(res_hasil.getString(0));
-            listtanggal.add(res_hasil.getString(6));
-            listjumlah.add("Jumlah : " + format_jml + " " + res_hasil.getString(9) + " (" + format_konversi + " " + "kg)");
+            listtanggal.add(res_hasil.getString(7));
+            listjumlah.add("Jumlah : " + format_jml + " " + res_hasil.getString(4) + " (" + format_konversi + " " + "kg)");
             listtotal_harga.add("Total Harga : Rp. " + format_tot_barang_jasa);
             listluaspanen.add("Luas Panen : ");
-            listnama.add("Pemasok : " + res_hasil.getString(5));
-            listcatatan.add(res_hasil.getString(7));
+            listnama.add("Pemasok : " + res_hasil.getString(6));
+            listcatatan.add(res_hasil.getString(8));
             listharga.add("Harga / kg : Rp. " + format_harga);
         }
 
