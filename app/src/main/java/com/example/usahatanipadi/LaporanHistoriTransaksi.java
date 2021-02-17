@@ -78,23 +78,23 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
         } else {
                 viewDataPenerimaan();
         }
-//
-//        sp_cari_berdasarkan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (position == 0) {
-//                    viewData();
-//                } else {
-//                    viewDataPenerimaan();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+
+        sp_cari_berdasarkan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    viewData();
+                } else {
+                    viewDataPenerimaan();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     /*
