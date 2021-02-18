@@ -42,16 +42,16 @@ public class MenuPenerimaanDanaTersimpan extends AppCompatActivity {
                 final String arrData[];
                 arrData = new String[cursor.getColumnCount()];
 
-                arrData[0] = cursor.getString(6); // tanggal
+                arrData[0] = cursor.getString(7); // tanggal
                 arrData[1] = cursor.getString(1); // id lahan sawah
                 arrData[2] = cursor.getString(2); // id jenis
                 arrData[3] = cursor.getString(3); // jumlah
-                arrData[4] = cursor.getString(4); // total
-                arrData[5] = cursor.getString(5); // nama pelanggan
-                arrData[6] = cursor.getString(7); // catatan
-                arrData[7] = cursor.getString(9); // satuan
-                arrData[8] = cursor.getString(11); // luas panen
-                arrData[9] = cursor.getString(12); // satuan luas panen
+                arrData[4] = cursor.getString(5); // total
+                arrData[5] = cursor.getString(6); // nama pelanggan
+                arrData[6] = cursor.getString(8); // catatan
+                arrData[7] = cursor.getString(4); // satuan
+                arrData[8] = cursor.getString(10); // luas panen
+                arrData[9] = cursor.getString(11); // satuan luas panen
 
                 TextView tv_tanggal_tersimpan = (TextView)findViewById(R.id.tanggal_tersimpan);
                 TextView tv_lahan_tersimpan = (TextView)findViewById(R.id.lahan_tersimpan);
@@ -69,7 +69,7 @@ public class MenuPenerimaanDanaTersimpan extends AppCompatActivity {
                 }
                 if(res_lahan !=null){
                     if(res_lahan.moveToFirst()){
-                        String lahan = res_lahan.getString(3);
+                        String lahan = res_lahan.getString(4);
                         tv_lahan_tersimpan.setText(lahan);
                     }
                 }

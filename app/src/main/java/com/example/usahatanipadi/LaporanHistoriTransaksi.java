@@ -213,7 +213,7 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             Cursor res_periode = db.getDataIdPeriode(periode_terpilih);
 
             while (res_periode.moveToNext()) {
-                tv_sawah.setText(res_sawah.getString(3) + " (" + res_periode.getString(2) + " " + res_periode.getString(4) + ")");
+                tv_sawah.setText(res_sawah.getString(4) + " (" + res_periode.getString(3) + " " + res_periode.getString(5) + ")");
             }
         }
 
@@ -230,21 +230,21 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             }
 
             DecimalFormat formatter = new DecimalFormat("#,###");
-            String format_tot_hasil_panen = formatter.format(Integer.parseInt(res_hasil.getString(4)));
+            String format_tot_hasil_panen = formatter.format((res_hasil.getInt(5)));
 
             float konversi_satuan=0;
-            if(res_hasil.getString(9).equals("ton")) {
-                konversi_satuan = Float.parseFloat(res_hasil.getString(3))*1000;
+            if(res_hasil.getString(4).equals("ton")) {
+                konversi_satuan = (res_hasil.getFloat(3))*1000;
             }
-            else if(res_hasil.getString(9).equals("kuintal")){
-                konversi_satuan = Float.parseFloat(res_hasil.getString(3))*100;
+            else if(res_hasil.getString(4).equals("kuintal")){
+                konversi_satuan = (res_hasil.getFloat(3))*100;
             }
-            else if(res_hasil.getString(9).equals("kg")){
-                konversi_satuan = Float.parseFloat(res_hasil.getString(3))*1;
+            else if(res_hasil.getString(4).equals("kg")){
+                konversi_satuan = (res_hasil.getFloat(3))*1;
             }
 
             float harga;
-            harga = res_hasil.getFloat(4) / konversi_satuan;
+            harga = res_hasil.getFloat(5) / konversi_satuan;
             String format_harga = formatter.format(harga);
 
             DecimalFormat df = new DecimalFormat("#.##");
@@ -253,12 +253,12 @@ public class LaporanHistoriTransaksi extends AppCompatActivity {
             String format_jml = res_hasil.getString(3).replaceAll("\\.", ",");
 
             list_id.add(res_hasil.getString(0));
-            listtanggal.add(res_hasil.getString(6));
-            listjumlah.add("Jumlah : " + format_jml + " " + res_hasil.getString(9) + " (" + format_konversi + " " + "kg)");
+            listtanggal.add(res_hasil.getString(7));
+            listjumlah.add("Jumlah : " + format_jml + " " + res_hasil.getString(4) + " (" + format_konversi + " " + "kg)");
             listtotal_harga.add("Total Harga : Rp. " + format_tot_hasil_panen);
-            listluaspanen.add("Luas Panen : " + res_hasil.getString(11) + " " + res_hasil.getString(12));
-            listnama.add("Pembeli : " + res_hasil.getString(5));
-            listcatatan.add(res_hasil.getString(7));
+            listluaspanen.add("Luas Panen : " + res_hasil.getString(10) + " " + res_hasil.getString(11));
+            listnama.add("Pembeli : " + res_hasil.getString(6));
+            listcatatan.add(res_hasil.getString(8));
             listharga.add("Harga / kg : Rp. " + format_harga);
         }
 

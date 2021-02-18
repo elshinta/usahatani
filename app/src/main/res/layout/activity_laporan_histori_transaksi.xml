@@ -25,15 +25,7 @@
             android:gravity="center"
             android:background="@drawable/border">
 
-            <TextView
-                android:id="@+id/alamat_sawah"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Diponegoro (Mei 2019)"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:gravity="center"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,9 +35,20 @@
                 android:layout_marginRight="10dp">
 
                 <TextView
+                    android:id="@+id/alamat_sawah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Diponegoro (Mei 2019)"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"/>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="10dp"
                     android:text="Cari Berdasarkan"
                     android:textColor="#000000"
                     android:textSize="13sp" />

@@ -339,14 +339,14 @@ public class LaporanPendapatan extends AppCompatActivity {
             Cursor res_periode = db.getDataIdPeriode(periode_terpilih);
 
             while (res_periode.moveToNext()) {
-                paragraph.add(res_sawah.getString(3));
-                luas_tabel1.add("Luas Lahan (" + res_sawah.getString(2) + " " + res_sawah.getString(5) + ")");
+                paragraph.add(res_sawah.getString(4));
+                luas_tabel1.add("Luas Lahan (" + res_sawah.getString(2) + " " + res_sawah.getString(6) + ")");
 
-                if(res_sawah.getString(5).equals("Rante")){
+                if(res_sawah.getString(6).equals("Rante")){
                     Float luas = res_sawah.getFloat(2)/25;
                     luas_tabel2.add("Luas Lahan (" +  String.valueOf(luas)+ " Ha)");
                 }
-                else if(res_sawah.getString(5).equals("Bau")){
+                else if(res_sawah.getString(6).equals("Bau")){
                     Float luas = res_sawah.getFloat(2)/8;
                     luas_tabel2.add("Luas Lahan (" +  String.valueOf(luas)+ " Ha)");
                 }
@@ -355,7 +355,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                     luas_tabel2.add("Luas Lahan (" +  String.valueOf(luas)+ " Ha)");
                 }
 
-                paragraph2.add(res_periode.getString(2) + " " + res_periode.getString(4) + " - " + res_periode.getString(3) + " " + res_periode.getString(5));
+                paragraph2.add(res_periode.getString(3) + " " + res_periode.getString(5) + " - " + res_periode.getString(4) + " " + res_periode.getString(6));
             }
         }
 
@@ -411,18 +411,17 @@ public class LaporanPendapatan extends AppCompatActivity {
                     String hasil_panen = res_hasil_panen.getString(1);
 
                     float konversi_satuan=1;
-                    if(res_penerimaan.getString(9).equals("ton")) {
+                    if(res_penerimaan.getString(4).equals("ton")) {
                         konversi_satuan = Float.parseFloat(res_penerimaan.getString(3))*1000;
                     }
-                    else if(res_penerimaan.getString(9).equals("kuintal")){
+                    else if(res_penerimaan.getString(4).equals("kuintal")){
                         konversi_satuan = Float.parseFloat(res_penerimaan.getString(3))*100;
                     }
-                    else if(res_penerimaan.getString(9).equals("kg")){
+                    else if(res_penerimaan.getString(4).equals("kg")){
                         konversi_satuan = Float.parseFloat(res_penerimaan.getString(3))*1;
                     }
 
-                    int nilai = res_penerimaan.getInt(4
-                    );
+                    int nilai = res_penerimaan.getInt(5);
                     int harga = (int) (nilai/konversi_satuan);
 
                     DecimalFormat formatter = new DecimalFormat("#,###");
@@ -442,8 +441,8 @@ public class LaporanPendapatan extends AppCompatActivity {
                     table.addCell(format_harga_penjualan);
                     table.addCell(format_harga_nilai);
 
-                    tot_penjualan += Integer.parseInt(res_penerimaan.getString(4));
-                    paragraph_luas_panen.add("(Luas Panen " + res_hasil_panen.getString(1) + " : " + res_penerimaan.getString(11) + " " + res_penerimaan.getString(12) + ") ");
+                    tot_penjualan += Integer.parseInt(res_penerimaan.getString(5));
+                    paragraph_luas_panen.add("(Luas Panen " + res_hasil_panen.getString(1) + " : " + res_penerimaan.getString(10) + " " + res_penerimaan.getString(11) + ") ");
                 }
             }
         }
@@ -496,20 +495,20 @@ public class LaporanPendapatan extends AppCompatActivity {
                         String kebutuhan_tanam = res_kebutuhan_tanam.getString(1);
 
                         float konversi_satuan2=1;
-                        if(res_biaya_tunai.getString(9).equals("ton")) {
-                            konversi_satuan2 = Float.parseFloat(res_biaya_tunai.getString(3))*1000;
+                        if(res_biaya_tunai.getString(4).equals("ton")) {
+                            konversi_satuan2 = (res_biaya_tunai.getFloat(3))*1000;
                         }
-                        else if(res_biaya_tunai.getString(9).equals("kuintal")){
-                            konversi_satuan2 = Float.parseFloat(res_biaya_tunai.getString(3))*100;
+                        else if(res_biaya_tunai.getString(4).equals("kuintal")){
+                            konversi_satuan2 = (res_biaya_tunai.getFloat(3))*100;
                         }
-                        else if(res_biaya_tunai.getString(9).equals("kg")){
-                            konversi_satuan2 = Float.parseFloat(res_biaya_tunai.getString(3))*1;
+                        else if(res_biaya_tunai.getString(4).equals("kg")){
+                            konversi_satuan2 = (res_biaya_tunai.getFloat(3))*1;
                         }
-                        else if(res_biaya_tunai.getString(9).equals("liter") || res_biaya_tunai.getString(9).equals("Rp") || res_biaya_tunai.getString(9).equals("HOK")) {
-                            konversi_satuan2 = Float.parseFloat(res_biaya_tunai.getString(3))*1;
+                        else if(res_biaya_tunai.getString(4).equals("liter") || res_biaya_tunai.getString(9).equals("Rp") || res_biaya_tunai.getString(9).equals("HOK")) {
+                            konversi_satuan2 = (res_biaya_tunai.getFloat(3))*1;
                         }
 
-                        int nilai = res_biaya_tunai.getInt(4);
+                        int nilai = res_biaya_tunai.getInt(5);
                         int harga = (int) (nilai/konversi_satuan2);
 
                         DecimalFormat formatter = new DecimalFormat("#,###");
@@ -522,8 +521,8 @@ public class LaporanPendapatan extends AppCompatActivity {
                         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
                         table.addCell(kebutuhan_tanam);
                         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-                        if(res_biaya_tunai.getString(9).equals("liter") || res_biaya_tunai.getString(9).equals("Rp") || res_biaya_tunai.getString(9).equals("Rp") || res_biaya_tunai.getString(9).equals("HOK")){
-                            table.addCell(res_biaya_tunai.getString(9));
+                        if(res_biaya_tunai.getString(4).equals("liter") || res_biaya_tunai.getString(4).equals("Rp") || res_biaya_tunai.getString(4).equals("Rp") || res_biaya_tunai.getString(4).equals("HOK")){
+                            table.addCell(res_biaya_tunai.getString(4));
                         }
                         else{
                             table.addCell("kg");
@@ -533,7 +532,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                         table.addCell(format_harga_biaya_tunai);
                         table.addCell(format_harga_nilai);
 
-                        tot_biaya_tunai += Integer.parseInt(res_biaya_tunai.getString(4));
+                        tot_biaya_tunai += Integer.parseInt(res_biaya_tunai.getString(5));
                         this.setTotalBiayaTunai(tot_biaya_tunai);
                     }
                 }
@@ -592,20 +591,20 @@ public class LaporanPendapatan extends AppCompatActivity {
                         String kebutuhan_tanam = res_kebutuhan_tanam.getString(1);
 
                         float konversi_satuan2=1;
-                        if(res_biaya_diperhitungkan.getString(9).equals("ton")) {
-                            konversi_satuan2 = Float.parseFloat(res_biaya_diperhitungkan.getString(3))*1000;
+                        if(res_biaya_diperhitungkan.getString(4).equals("ton")) {
+                            konversi_satuan2 = (res_biaya_diperhitungkan.getFloat(5))*1000;
                         }
-                        else if(res_biaya_diperhitungkan.getString(9).equals("kuintal")){
-                            konversi_satuan2 = Float.parseFloat(res_biaya_diperhitungkan.getString(3))*100;
+                        else if(res_biaya_diperhitungkan.getString(4).equals("kuintal")){
+                            konversi_satuan2 = (res_biaya_diperhitungkan.getFloat(5))*100;
                         }
-                        else if(res_biaya_diperhitungkan.getString(9).equals("kg")){
-                            konversi_satuan2 = Float.parseFloat(res_biaya_diperhitungkan.getString(3))*1;
+                        else if(res_biaya_diperhitungkan.getString(4).equals("kg")){
+                            konversi_satuan2 = (res_biaya_diperhitungkan.getFloat(5))*1;
                         }
-                        else if(res_biaya_diperhitungkan.getString(9).equals("liter") || res_biaya_diperhitungkan.getString(9).equals("Rp") || res_biaya_diperhitungkan.getString(9).equals("HOK")) {
-                            konversi_satuan2 = Float.parseFloat(res_biaya_diperhitungkan.getString(3))*1;
+                        else if(res_biaya_diperhitungkan.getString(4).equals("liter") || res_biaya_diperhitungkan.getString(9).equals("Rp") || res_biaya_diperhitungkan.getString(9).equals("HOK")) {
+                            konversi_satuan2 = (res_biaya_diperhitungkan.getFloat(5))*1;
                         }
 
-                        int nilai = res_biaya_diperhitungkan.getInt(4);
+                        int nilai = res_biaya_diperhitungkan.getInt(5);
                         int harga = (int) (nilai/konversi_satuan2);
 
                         DecimalFormat formatter = new DecimalFormat("#,###");
@@ -624,7 +623,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                         table.addCell(format_harga_biaya_tunai);
                         table.addCell(format_harga_nilai);
 
-                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(4));
+                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(5));
                         this.setTotalBiayaDiperhitungkan(tot_biaya_diperhitungkan);
                     }
                 }
@@ -837,7 +836,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                 if (res_hasil_panen.moveToFirst()) {
                     String hasil_panen = res_hasil_panen.getString(1);
 
-                    int nilai = res_penerimaan.getInt(4);
+                    int nilai = res_penerimaan.getInt(5);
                     int harga = (int) (nilai/res_penerimaan.getFloat(3));
 
                     String format_harga_penjualan = formatter.format(harga);
@@ -848,13 +847,13 @@ public class LaporanPendapatan extends AppCompatActivity {
                     table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
                     table2.addCell(hasil_panen);
                     table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-                    table2.addCell(res_penerimaan.getString(9));
+                    table2.addCell(res_penerimaan.getString(4));
                     table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
                     table2.addCell(res_penerimaan.getString(3));
                     table2.addCell(format_harga_penjualan);
                     table2.addCell(format_harga_nilai);
 
-                    tot_penjualan += Integer.parseInt(res_penerimaan.getString(4));
+                    tot_penjualan += Integer.parseInt(res_penerimaan.getString(5));
 
                 }
             }
@@ -907,7 +906,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                     if (!res_kebutuhan_tanam.getString(2).equals("Data Diperhitungkan") && !res_kebutuhan_tanam.getString(2).equals("Data Alat")) {
                         String kebutuhan_tanam = res_kebutuhan_tanam.getString(1);
 
-                        int nilai = res_biaya_tunai.getInt(4);
+                        int nilai = res_biaya_tunai.getInt(5);
                         int harga = (int) (nilai/res_biaya_tunai.getFloat(3));
 
                         String format_harga_biaya_tunai = formatter.format(harga);
@@ -918,13 +917,13 @@ public class LaporanPendapatan extends AppCompatActivity {
                         table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
                         table2.addCell(kebutuhan_tanam);
                         table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-                        table2.addCell(res_biaya_tunai.getString(9));
+                        table2.addCell(res_biaya_tunai.getString(4));
                         table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
                         table2.addCell(res_biaya_tunai.getString(3));
                         table2.addCell(format_harga_biaya_tunai);
                         table2.addCell(format_harga_nilai);
 
-                        tot_biaya_tunai += Integer.parseInt(res_biaya_tunai.getString(4));
+                        tot_biaya_tunai += Integer.parseInt(res_biaya_tunai.getString(5));
                         this.setTotalBiayaTunai(tot_biaya_tunai);
                     }
                 }
@@ -983,7 +982,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                     if (res_kebutuhan_tanam.getString(2).equals("Data Diperhitungkan") || res_kebutuhan_tanam.getString(2).equals("Data Alat")) {
                         String kebutuhan_tanam = res_kebutuhan_tanam.getString(1);
 
-                        int nilai = res_biaya_diperhitungkan.getInt(4);
+                        int nilai = res_biaya_diperhitungkan.getInt(5);
                         int harga = (int) (nilai/res_biaya_diperhitungkan.getFloat(3));
 
                         formatter = new DecimalFormat("#,###");
@@ -1002,7 +1001,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                         table2.addCell(format_harga_biaya_tunai);
                         table2.addCell(format_harga_nilai);
 
-                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(4));
+                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(5));
                         this.setTotalBiayaDiperhitungkan(tot_biaya_diperhitungkan);
                     }
                 }
@@ -1359,7 +1358,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                     TextView tv_harga_penjualan = new TextView(this);
 
                     DecimalFormat formatter = new DecimalFormat("#,###");
-                    String format_harga_penjualan = formatter.format(res_penerimaan.getInt(4));
+                    String format_harga_penjualan = formatter.format(res_penerimaan.getInt(5));
 
                     tv_penjualan.setText(hasil_panen);
                     tv_penjualan.setTextColor(Color.BLACK);
@@ -1371,9 +1370,9 @@ public class LaporanPendapatan extends AppCompatActivity {
 //                    row.addView(tv_satuan_penjualan);
                     row.addView(tv_harga_penjualan,1);
                     tb_penjualan.addView(row);
-                    tot_penjualan += Integer.parseInt(res_penerimaan.getString(4));
+                    tot_penjualan += (res_penerimaan.getInt(5));
                 }
-                tv_luas_panen.setText("Luas Panen (" + res_hasil_panen.getString(1) + " : " + res_penerimaan.getString(11) + " " + res_penerimaan.getString(12) + ")");
+                tv_luas_panen.setText("Luas Panen (" + res_hasil_panen.getString(1) + " : " + res_penerimaan.getString(10) + " " + res_penerimaan.getString(11) + ")");
             }
         }
 
@@ -1414,7 +1413,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                         TextView tv_harga_biaya_tunai = new TextView(this);
 
                         DecimalFormat formatter = new DecimalFormat("#,###");
-                        String format_harga_penjualan = formatter.format(res_biaya_tunai.getInt(4));
+                        String format_harga_penjualan = formatter.format(res_biaya_tunai.getInt(5));
 
                         tv_nomor.setText("");
                         tv_biaya_tunai.setText(kebutuhan_tanam);
@@ -1429,7 +1428,7 @@ public class LaporanPendapatan extends AppCompatActivity {
 //                        row.addView(tv_satuan_biaya_tunai);
                         row.addView(tv_harga_biaya_tunai);
                         tb_biaya_tunai.addView(row);
-                        tot_biaya_tunai += Integer.parseInt(res_biaya_tunai.getString(4));
+                        tot_biaya_tunai += (res_biaya_tunai.getInt(5));
 
                     }
                 }
@@ -1474,7 +1473,7 @@ public class LaporanPendapatan extends AppCompatActivity {
                         TextView tv_harga_biaya_diperhitungkan = new TextView(this);
 
                         DecimalFormat formatter = new DecimalFormat("#,###");
-                        String format_harga_penjualan = formatter.format(res_biaya_diperhitungkan.getInt(4));
+                        String format_harga_penjualan = formatter.format(res_biaya_diperhitungkan.getInt(5));
 
                         tv_nomor.setText("");
                         tv_biaya_diperhitungkan.setText(kebutuhan_tanam);
@@ -1489,7 +1488,7 @@ public class LaporanPendapatan extends AppCompatActivity {
 //                        row.addView(tv_satuan_biaya_diperhitungkan);
                         row.addView(tv_harga_biaya_diperhitungkan);
                         tb_biaya_diperhitungkan.addView(row);
-                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(4));
+                        tot_biaya_diperhitungkan += Integer.parseInt(res_biaya_diperhitungkan.getString(5));
 
                     }
                 }
