@@ -67,6 +67,15 @@ public class SurveyFragment extends Fragment {
 
         getSurvey(NetworkStateChecker.URL_GET_SURVEY,id_pengguna);
 
+        Cursor res_count_survey = db.countDataSurvey(id_pengguna);
+        if (res_count_survey.getCount() == 0) {
+            Toast.makeText(this.getActivity(), "Something error", Toast.LENGTH_SHORT).show();
+        }
+        while (res_count_survey.moveToNext()) {
+            MenuUtama.COUNT_SURVEY = res_count_survey.getString(0);
+            MenuUtama.surveyNotif.setText(MenuUtama.COUNT_SURVEY);
+        }
+
         viewData();
 
         simpleList = (ListView) view.findViewById(R.id.lv_data_survey);
@@ -161,7 +170,6 @@ public class SurveyFragment extends Fragment {
 
                             insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
                             getPertanyaanSurvey(NetworkStateChecker.URL_GET_PERTANYAAN_SURVEY,id_survey);
-                            Log.d("DEBUG",insert.toString());
                             if(insert){
                                 newData++;
                             }

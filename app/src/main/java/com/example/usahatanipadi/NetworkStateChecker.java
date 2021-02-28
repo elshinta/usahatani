@@ -536,7 +536,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                             insert = db.insert_survey(id_survey,id_pengguna,jenis_pertanyaan,jumlah_pertanyaan,id_periode,nama_surveyor);
                             getPertanyaanSurvey(URL_GET_PERTANYAAN_SURVEY,id_survey);
-                            Log.d("DEBUG",insert.toString());
                             if(insert){
                                 newData++;
                             }
@@ -544,6 +543,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     }
 
                     if(newData >0 ){
+                        int count = Integer.parseInt(MenuUtama.COUNT_SURVEY);
+                        count+=newData;
+                        MenuUtama.COUNT_SURVEY = String.valueOf(count);
+                        MenuUtama.surveyNotif.setText(MenuUtama.COUNT_SURVEY);
                         Toast.makeText(context, "Anda memiliki " + newData + " survey baru", Toast.LENGTH_SHORT).show();
                     } else{
                         Toast.makeText(context, "Tidak ada survey baru", Toast.LENGTH_SHORT).show();

@@ -140,8 +140,6 @@ public class JawabanActivity extends AppCompatActivity {
                         return;
                     } while (res.moveToNext()) {
                         Date date = new Date();
-                        Log.d("DEBUG", String.valueOf(i));
-                        Log.d("DEBUG", allEds.get(i).getText().toString());
                         JSONObject dataJawaban = new JSONObject();
                         dataJawaban.put("id_pertanyaan",res.getString(0));
                         dataJawaban.put("jawaban_body",allEds.get(i).getText().toString());
@@ -173,8 +171,11 @@ public class JawabanActivity extends AppCompatActivity {
                                         String jawaban_body = jawabanSingle.getString("jawaban_body");
                                         String updated_at = jawabanSingle.getString("updated_at");
 
-//                                        Log.d("DEBUG",jawaban_body);
                                         db.insert_jawaban(id_pengguna,id_pertanyaan,id_survey,jawaban_body,updated_at);
+                                        finish();
+                                        Intent intent2 = new Intent(JawabanActivity.this, MenuUtama.class);
+                                        intent2.putExtra("menuFragment", "surveyFragment");
+                                        startActivity(intent2);
 
                                     }
 
@@ -201,15 +202,6 @@ public class JawabanActivity extends AppCompatActivity {
                         }
                     };
                     VolleySingleton.getInstance(JawabanActivity.this).addToRequestQueue(stringRequest);
-
-                    finish();
-                    int count = Integer.parseInt(MenuUtama.COUNT_SURVEY);
-                    count--;
-                    MenuUtama.COUNT_SURVEY = String.valueOf(count);
-                    MenuUtama.surveyNotif.setText(MenuUtama.COUNT_SURVEY);
-                    Intent intent2 = new Intent(JawabanActivity.this, MenuUtama.class);
-                    intent2.putExtra("menuFragment", "surveyFragment");
-                    startActivity(intent2);
 
 //                    Log.d("DEBUG", arrayJawaban.toString());
                 } catch (Exception e){

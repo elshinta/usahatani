@@ -86,7 +86,7 @@ public class InfoPenggunaFragment extends Fragment {
                 et_nama_pemilik.setText(res.getString(2));
                 et_nomor_telepon.setText(res.getString(3));
                 et_deskripsi_usahatani.setText(res.getString(4));
-                et_nama_pengguna.setText(res.getString(5));
+                et_nama_pengguna.setText(res.getString(7));
                 id_pengguna = res.getString(0);
                 pw = res.getString(6);
             }
