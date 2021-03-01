@@ -126,7 +126,7 @@ public class MasterDataHasilPanen extends AppCompatActivity {
         db = new DatabaseHelper(this);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("Tambah Data Hasil Panen")
-                .setMessage("hasil panen digunakan untuk menyuburkan tanah")
+                .setMessage("Data hasil panen digunakan untuk mengetahui hasil panen")
                 .setView(dataHasilPanenBaru)
                 .setPositiveButton("Tambah", new DialogInterface.OnClickListener() {
                     @Override
@@ -266,6 +266,11 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                     JSONObject obj = new JSONObject(response);
                                     if (!obj.getBoolean("error")) {
                                         progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        progressDialog.dismiss();
 
                                         //if there is a success
                                         //storing the name to sqlite with status synced
@@ -277,9 +282,8 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal mengubah data hasil panen", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -334,6 +338,11 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                     if (!obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        progressDialog.dismiss();
 
 
                                         //if there is a success
@@ -345,9 +354,8 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal menghapus data hasil panen", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+
 
                                     }
                                 } catch (JSONException e) {

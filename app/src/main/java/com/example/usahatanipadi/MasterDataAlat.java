@@ -126,7 +126,7 @@ public class MasterDataAlat extends AppCompatActivity {
         db = new DatabaseHelper(this);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("Tambah Data Alat")
-                .setMessage("alat digunakan untuk menyuburkan tanah")
+                .setMessage("Data alat digunakan untuk mengetahui alat yang digunakan petani")
                 .setView(dataAlatBaru)
                 .setPositiveButton("Tambah", new DialogInterface.OnClickListener() {
                     @Override
@@ -264,6 +264,11 @@ public class MasterDataAlat extends AppCompatActivity {
                                     JSONObject obj = new JSONObject(response);
                                     if (!obj.getBoolean("error")) {
                                         progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        progressDialog.dismiss();
 
                                         //if there is a success
                                         //storing the name to sqlite with status synced
@@ -275,9 +280,7 @@ public class MasterDataAlat extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal mengubah data alat", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -290,7 +293,7 @@ public class MasterDataAlat extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 //Peringatan jika ingin menambah data harus online
-                                Toast.makeText(getApplicationContext(), "Untuk mengubah data alat harus terhunbung dengan koneksi internet!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Untuk mengubah data alat harus terhubung dengan koneksi internet!", Toast.LENGTH_SHORT).show();
                             }
                         }) {
                             @Override
@@ -340,6 +343,11 @@ public class MasterDataAlat extends AppCompatActivity {
                                     if (!obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        progressDialog.dismiss();
 
                                         //if there is a success
                                         //storing the name to sqlite with status synced
@@ -350,9 +358,6 @@ public class MasterDataAlat extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal menghapus data alat", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
 
                                     }
                                 } catch (JSONException e) {

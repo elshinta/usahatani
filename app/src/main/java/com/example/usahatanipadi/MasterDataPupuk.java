@@ -126,7 +126,7 @@ public class MasterDataPupuk extends AppCompatActivity {
         db = new DatabaseHelper(this);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("Tambah Data Pupuk")
-                .setMessage("pupuk digunakan untuk menyuburkan tanah")
+                .setMessage("Data pupuk digunakan untuk mengetahui jenis pupuk yang digunakan petani")
                 .setView(dataPupukBaru)
                 .setPositiveButton("Tambah", new DialogInterface.OnClickListener() {
                     @Override
@@ -264,6 +264,12 @@ public class MasterDataPupuk extends AppCompatActivity {
                                 try {
                                     JSONObject obj = new JSONObject(response);
                                     if (!obj.getBoolean("error")) {
+
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
                                         progressDialog.dismiss();
 
                                         //if there is a success
@@ -276,9 +282,7 @@ public class MasterDataPupuk extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal mengubah data pupuk", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -336,6 +340,11 @@ public class MasterDataPupuk extends AppCompatActivity {
                                     if (!obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        progressDialog.dismiss();
 
                                         //if there is a success
                                         //storing the name to sqlite with status synced
@@ -346,9 +355,6 @@ public class MasterDataPupuk extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal menghapus data pupuk", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
 
                                     }
                                 } catch (JSONException e) {
