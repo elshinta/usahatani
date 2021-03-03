@@ -263,7 +263,7 @@ public class MasterDataObatHama extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject obj = new JSONObject(response);
-                                    if (!obj.getBoolean("error")) {
+                                    if (obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
@@ -338,7 +338,7 @@ public class MasterDataObatHama extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject obj = new JSONObject(response);
-                                    if (!obj.getBoolean("error")) {
+                                    if (obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();

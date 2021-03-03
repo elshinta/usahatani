@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -171,6 +172,7 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Gagal memasukkan data hasil panen", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
@@ -264,12 +266,10 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject obj = new JSONObject(response);
-                                    if (!obj.getBoolean("error")) {
+                                    if (obj.getBoolean("error")) {
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
-
                                     } else {
-
                                         progressDialog.dismiss();
 
                                         //if there is a success
@@ -335,7 +335,7 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject obj = new JSONObject(response);
-                                    if (!obj.getBoolean("error")) {
+                                    if (obj.getBoolean("error")) {
 
                                         progressDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Periksa kembali data Anda!", Toast.LENGTH_SHORT).show();
@@ -354,9 +354,6 @@ public class MasterDataHasilPanen extends AppCompatActivity {
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Gagal menghapus data hasil panen", Toast.LENGTH_SHORT).show();
                                         }
-
-
-
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
